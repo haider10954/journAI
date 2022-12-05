@@ -51,7 +51,7 @@
 <!-- end page title -->
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
         <div class="card card-animate">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
@@ -72,7 +72,49 @@
         </div> <!-- end card-->
     </div> <!-- end col-->
 
-    <div class="col-md-6">
+    <div class="col-md-3">
+        <div class="card card-animate">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="fw-medium text-muted mb-0">Title</p>
+                        <h2 class="mt-4 ff-secondary fw-semibold">Note Description</h2>
+                        <p class="mb-0 text-muted">05/12/2022</p>
+                    </div>
+                    <div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                                <i data-feather="trash" class="text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end card body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-md-3">
+        <div class="card card-animate">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="fw-medium text-muted mb-0">Title</p>
+                        <h2 class="mt-4 ff-secondary fw-semibold">Note Description</h2>
+                        <p class="mb-0 text-muted">05/12/2022</p>
+                    </div>
+                    <div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                                <i data-feather="trash" class="text-danger"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end card body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-md-3">
         <div class="card card-animate">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
