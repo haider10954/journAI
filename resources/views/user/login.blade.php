@@ -38,8 +38,8 @@
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
-                                                <a href="index.html" class="d-block">
-                                                    <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="18">
+                                                <a href="#" class="d-block">
+                                                    <img src="{{ asset('assets/images/logo-white.png') }} " alt="" height="50">
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
