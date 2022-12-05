@@ -5810,7 +5810,7 @@ a, button {
 }
 
 .btn-ghost-secondary {
-    color: #3577f1;
+    color: #fff !important;
     border-color: transparent
 }
 
