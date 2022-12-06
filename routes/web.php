@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('user.index');
 })->name('index');
 
+Route::get('/notes', function () {
+    return view('user.notes');
+})->name('notes');
+
 Route::get('/login', function () {
     return view('user.login');
 })->name('login');

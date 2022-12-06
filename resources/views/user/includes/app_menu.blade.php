@@ -31,19 +31,19 @@
             </div>
             <ul class="navbar-nav justify-content-center" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarApps">
+                    <a class="nav-link menu-link" href="{{ route('index') }}">
                         <i class="ri-apps-2-line"></i> <span data-key="t-apps">Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarApps">
+                    <a class="nav-link menu-link" href="javascript:void()">
                         <i class="ri-layout-3-line"></i> <span data-key="t-apps">Get Expert Advice On-Demand</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarApps">
+                    <a class="nav-link menu-link" href="{{ route('notes') }}">
                         <i class="ri-account-circle-line"></i> <span data-key="t-apps">Add new Note</span>
                     </a>
                 </li>
