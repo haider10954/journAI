@@ -1,4 +1,4 @@
-<header id="page-topbar" style="background: #222C5F;">
+<header id="page-topbar" style="background: #405189;">
     <div class="layout-width">
         <div class="navbar-header">
             <div class="d-flex">
@@ -34,12 +34,19 @@
 
             <div class="d-flex align-items-center">
 
+                <div class="ms-1 header-item d-none d-sm-flex">
+                    <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-toggle="fullscreen">
+                        <i class='bx bx-fullscreen fs-22'></i>
+                    </button>
+                </div>
 
                 <div class="ms-1 header-item d-none d-sm-flex">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode">
                         <i class='bx bx-moon fs-22'></i>
                     </button>
                 </div>
+
+
 
                 <div class="dropdown topbar-head-dropdown ms-1 header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
