@@ -33,5 +33,7 @@
 <!-- Dashboard init -->
 <script src="{{ asset('assets/js/pages/dashboard-analytics.init.js') }}"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <!-- App js -->
 <script src="{{ asset('assets/js/app.js') }}"></script>

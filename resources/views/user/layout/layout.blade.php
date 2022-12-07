@@ -54,6 +54,7 @@
 
     <!-- JAVASCRIPT -->
     @include('user.includes.script')
+    @yield('custom-script')
 </body>
 
 

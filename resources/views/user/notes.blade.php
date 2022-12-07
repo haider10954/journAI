@@ -39,45 +39,100 @@
 
 <div class="row">
     <div class="col-lg-3">
-        <div class="card tasks-box">
-            <div class="card-body">
-                <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="apps-tasks-details.html" class="d-block">Profile Page Structure</a></h6>
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                            <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                        </ul>
+        <a>
+            <div class="card tasks-box">
+                <div class="card-body">
+                    <div class="d-flex mb-2">
+                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" id="openAI" class="d-block">Note Title</a></h6>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <p class="text-muted">Profile Page means a web page accessible to the public or to guests.</p>
-                <div class="mb-3">
-                    <div class="d-flex mb-1">
+                    <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
+                    <div class="mb-3">
+                        <div class="d-flex mb-1">
+                            <div class="flex-grow-1">
+                                <h6 class="text-muted mb-0"><span class="text-secondary">25% </span>of AI Analytics</h6>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <span class="text-muted">03 Jan, 2022</span>
+                            </div>
+                        </div>
+                        <div class="progress rounded-3 progress-sm">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">15%</span> of 100%</h6>
+                            <span class="badge badge-soft-primary">User Name</span>
                         </div>
                         <div class="flex-shrink-0">
-                            <span class="text-muted">03 Jan, 2022</span>
+                            <div class="avatar-group">
+                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                    <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
+                                </a>
+                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
+                                    <img src="{{ asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xxs">
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3" style="display: none;" id="AI">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <span class="badge badge-soft-primary">Admin</span>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <div class="avatar-group">
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                <img src="assets/images/users/avatar-6.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
-                                <img src="assets/images/users/avatar-5.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
+
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end justify-content-end">
+                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
                         </div>
                     </div>
                 </div>
@@ -85,148 +140,6 @@
         </div>
     </div>
 
-    <div class="col-lg-3">
-        <div class="card tasks-box">
-            <div class="card-body">
-                <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="apps-tasks-details.html" class="d-block">Profile Page Structure</a></h6>
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                            <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-muted">Profile Page means a web page accessible to the public or to guests.</p>
-                <div class="mb-3">
-                    <div class="d-flex mb-1">
-                        <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">15%</span> of 100%</h6>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <span class="text-muted">03 Jan, 2022</span>
-                        </div>
-                    </div>
-                    <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <span class="badge badge-soft-primary">Admin</span>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <div class="avatar-group">
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                <img src="assets/images/users/avatar-6.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
-                                <img src="assets/images/users/avatar-5.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-lg-3">
-        <div class="card tasks-box">
-            <div class="card-body">
-                <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="apps-tasks-details.html" class="d-block">Profile Page Structure</a></h6>
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                            <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-muted">Profile Page means a web page accessible to the public or to guests.</p>
-                <div class="mb-3">
-                    <div class="d-flex mb-1">
-                        <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">15%</span> of 100%</h6>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <span class="text-muted">03 Jan, 2022</span>
-                        </div>
-                    </div>
-                    <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <span class="badge badge-soft-primary">Admin</span>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <div class="avatar-group">
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                <img src="assets/images/users/avatar-6.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
-                                <img src="assets/images/users/avatar-5.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-lg-3">
-        <div class="card tasks-box">
-            <div class="card-body">
-                <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="apps-tasks-details.html" class="d-block">Profile Page Structure</a></h6>
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                            <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-muted">Profile Page means a web page accessible to the public or to guests.</p>
-                <div class="mb-3">
-                    <div class="d-flex mb-1">
-                        <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">15%</span> of 100%</h6>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <span class="text-muted">03 Jan, 2022</span>
-                        </div>
-                    </div>
-                    <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <span class="badge badge-soft-primary">Admin</span>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <div class="avatar-group">
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                <img src="assets/images/users/avatar-6.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
-                                <img src="assets/images/users/avatar-5.jpg" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -341,5 +254,44 @@
     </div>
 </div>
 <!--end modal -->
+
+
+<div class="modal fade zoomIn" id="suggestionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AI Suggestion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--end modal -->
+
+
+
+@endsection
+
+@section('custom-script')
+<script>
+    var flag = true;
+    $('#openAI').on('click', function() {
+        if (flag) {
+            $('#AI').fadeIn();
+            flag = false;
+        } else {
+            $('#AI').fadeOut();
+            flag = true;
+        }
+
+    });
+</script>
 
 @endsection
