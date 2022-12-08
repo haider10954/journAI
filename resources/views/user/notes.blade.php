@@ -136,7 +136,7 @@
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" id="openAI3" class="d-block">Note Title</a></h6>
+                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a data-bs-toggle="modal" href="#aiModal" class="d-block">Note Title</a></h6>
                     <div class="dropdown">
                         <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
@@ -350,6 +350,67 @@
 <!--end modal -->
 
 
+<div class="modal fade zoomIn" id="aiModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="delete-btn-close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end justify-content-end">
+                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end modal -->
+
+
 <div class="modal fade zoomIn" id="suggestionModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -389,18 +450,6 @@
 
     var flag = true;
     $('#openAI2').on('click', function() {
-        if (flag) {
-            $('#AI').fadeIn();
-            flag = false;
-        } else {
-            $('#AI').fadeOut();
-            flag = true;
-        }
-
-    });
-
-    var flag = true;
-    $('#openAI3').on('click', function() {
         if (flag) {
             $('#AI').fadeIn();
             flag = false;
