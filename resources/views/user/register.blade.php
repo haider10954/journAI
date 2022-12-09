@@ -127,7 +127,7 @@
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button class="btn btn-success w-100" type="submit">Sign Up</button>
+                                                    <a class="btn btn-success w-100" type="submit" href="{{ route('login') }}">Sign Up</a>
                                                 </div>
                                             </form>
                                         </div>
