@@ -24,10 +24,26 @@
 <div class="card">
     <div class="card-body">
         <div class="row g-2">
-            <div class="col-lg-auto">
-                <div class="hstack gap-2">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i> Create Note</button>
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between">
+                    <div class="hstack gap-2">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i> Create Note</button>
+                    </div>
+                    <form action="javascript:void(0);">
+                        <div class="row g-3 mb-0 align-items-center">
+                            <div class="col-sm-auto">
+                                <div class="input-group">
+                                    <input type="date" class="form-control border-0">
+                                    <div class="input-group-text bg-primary border-primary text-white">
+                                        <i class="ri-calendar-2-line"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+
+
             </div>
             <!--end col-->
         </div>
@@ -128,7 +144,7 @@
                         <div class="mb-3">
                             <!-- Labels Example -->
                             <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
                             </div>
                         </div>
 
@@ -234,7 +250,7 @@
                         <div class="mb-3">
                             <!-- Labels Example -->
                             <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
                             </div>
                         </div>
 
