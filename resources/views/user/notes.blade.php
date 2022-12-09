@@ -38,7 +38,7 @@
 <!--end card-->
 
 <div class="row mb-3">
-    <div class="col-lg-4" id="openAI">
+    <div class="col-lg-4 mb-3" id="openAI">
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="my_note">
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4" style="display: none;" id="AI">
+    <div class="col-lg-4 mb-3" style="display: none;" id="AI">
         <div class="card h-100">
             <div class="card-body">
                 <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
@@ -95,7 +95,7 @@
                         <div class="mb-3">
                             <!-- Labels Example -->
                             <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
                             </div>
                         </div>
 
@@ -112,6 +112,13 @@
                                 <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 45%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> approval 45%</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -121,7 +128,7 @@
                         <div class="mb-3">
                             <!-- Labels Example -->
                             <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
                             </div>
                         </div>
 
@@ -139,7 +146,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-3" id="openAI2">
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="d-flex mb-2">
@@ -185,11 +192,71 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 mb-3" style="display: none;" id="AI2">
+        <div class="card h-100">
+            <div class="card-body">
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 45%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> approval 45%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end justify-content-end">
+                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-3" id="openAI3">
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a data-bs-toggle="modal" href="#aiModal" class="d-block">Note Title</a></h6>
+                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a class="d-block">Note Title</a></h6>
                     <div class="dropdown">
                         <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
@@ -225,6 +292,66 @@
                             <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
                                 <img src="{{ asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xxs">
                             </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 mb-3" style="display: none;" id="AI3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 45%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> approval 45%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <!-- Labels Example -->
+                            <div class="progress progress_bar">
+                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end justify-content-end">
+                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
                         </div>
                     </div>
                 </div>
@@ -347,67 +474,6 @@
 <!--end modal -->
 
 
-<div class="modal fade zoomIn" id="aiModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="delete-btn-close"></button>
-            </div>
-            <div class="modal-body">
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-end">
-                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--end modal -->
-
-
 <div class="modal fade zoomIn" id="suggestionModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -434,13 +500,28 @@
 @section('custom-script')
 <script>
     $('#openAI').on('click', function() {
-        $(this).next('#AI')
-    });
-    $('#openAI').on('click', function() {
         if ($(this).next('#AI').css('display') !== 'block') {
             $(this).next('#AI').fadeIn();
         } else {
             $(this).next('#AI').fadeOut();
+        }
+
+    });
+
+    $('#openAI2').on('click', function() {
+        if ($(this).next('#AI2').css('display') !== 'block') {
+            $(this).next('#AI2').fadeIn();
+        } else {
+            $(this).next('#AI2').fadeOut();
+        }
+
+    });
+
+    $('#openAI3').on('click', function() {
+        if ($(this).next('#AI3').css('display') !== 'block') {
+            $(this).next('#AI3').fadeIn();
+        } else {
+            $(this).next('#AI3').fadeOut();
         }
 
     });

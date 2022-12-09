@@ -44,7 +44,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="{{ route('notes') }}">
-                        <i class="ri-account-circle-line"></i> <span data-key="t-apps">My Note</span>
+                        <i class="ri-account-circle-line"></i> <span data-key="t-apps">My Notes</span>
                     </a>
                 </li>
 
