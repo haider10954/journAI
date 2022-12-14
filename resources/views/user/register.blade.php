@@ -94,11 +94,9 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" name="password">
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                                        <div class="invalid-feedback">
-                                                            Please enter password
-                                                        </div>
+                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password" aria-describedby="passwordInput" name="password">
+                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon togglePassword" type="button" id="togglePassword"><i class="ri-eye-fill align-middle"></i></button>
+                                                        <div class="error-password"></div>
                                                     </div>
                                                 </div>
 
@@ -106,7 +104,7 @@
                                                     <label class="form-label" for="password-input">Confirm Password</label>
                                                     <div class="position-relative auth-pass-inputgroup">
                                                         <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Confirm password" id="password-input" aria-describedby="passwordInput" name="confirm_password">
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon togglePassword" type="button" id="password-addon"></button>
                                                         <div class="invalid-feedback">
                                                             Please enter password again
                                                         </div>
@@ -186,7 +184,7 @@
                 },
                 success: function(res) {
                     $("#submitForm").attr('class', 'btn btn-success');
-                    $("#submitForm").html('<i class="fa fa-check me-1"></i>  Student Registered</>');
+                    $("#submitForm").html('<i class="fa fa-check me-1"></i>  User Registered</>');
                     if (res.success) {
                         $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
                         setTimeout(function() {
@@ -200,7 +198,22 @@
                             window.location.href = "{{ route('user_login') }}";
                         }, 4000);
 
-                    } else {}
+                        $('.prompt').show()
+
+                    } else {
+                        $('.prompt').html('<div class="alert alert-danger mb-3">' + res.message + '</div>');
+                        setTimeout(function() {
+                            $('html, body').animate({
+                                scrollTop: $("html, body").offset().top
+                            }, 1000);
+                        }, 1500);
+
+                        setTimeout(function() {
+                            $('.prompt').hide()
+                        }, 2000);
+
+                        $('.prompt').show()
+                    }
                 },
                 error: function(e) {
                     $("#submitForm").prop('disabled', false);
@@ -211,9 +224,35 @@
                     if (e.responseJSON.errors['email']) {
                         $('.error-email').html('<small class=" error-message text-danger">' + e.responseJSON.errors['email'][0] + '</small>');
                     }
+                    if (e.responseJSON.errors['password']) {
+                        $('.error-password').html('<small class=" error-message text-danger">' + e.responseJSON.errors['password'][0] + '</small>');
+                    }
                 }
 
+
             });
+        });
+
+        const togglePassword = document.querySelector('.togglePassword');
+        const password = document.querySelector('#password');
+        const password_1 = document.querySelector('#password-input');
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            let type;
+            if (password.getAttribute('type') === 'password') {
+                type = 'text';
+                password.setAttribute('type', type);
+                password_1.setAttribute('type', type);
+                this.classList.add('fa-eye-slash');
+                this.classList.remove("fa-eye");
+            } else {
+                type = 'password';
+                password.setAttribute('type', type);
+                password_1.setAttribute('type', type);
+                this.classList.add("fa-eye");
+                this.classList.remove('fa-eye-slash');
+            }
         });
     </script>
 

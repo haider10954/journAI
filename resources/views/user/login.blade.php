@@ -94,8 +94,8 @@
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5" placeholder="Enter password" id="password-input" name="password">
-                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                        <input type="password" class="form-control pe-5" placeholder="Enter password" id="password" name="password">
+                                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="togglePassword"><i class="ri-eye-fill align-middle"></i></button>
                                                     </div>
                                                     <div class="error-password"></div>
                                                 </div>
@@ -112,7 +112,7 @@
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Don't have an account ? <a class="fw-semibold text-primary text-decoration-underline" href="{{ route('register') }}"> Signup</a> </p>
+                                            <p class="mb-0">Don't have an account ? <a class="fw-semibold text-primary text-decoration-underline" href="{{ route('user_register') }}"> Signup</a> </p>
                                         </div>
                                     </div>
                                 </div>
@@ -208,6 +208,25 @@
                 }
 
             });
+        });
+
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            let type;
+            if (password.getAttribute('type') === 'password') {
+                type = 'text';
+                password.setAttribute('type', type);
+                this.classList.add('fa-eye-slash');
+                this.classList.remove("fa-eye");
+            } else {
+                type = 'password';
+                password.setAttribute('type', type);
+                this.classList.add("fa-eye");
+                this.classList.remove('fa-eye-slash');
+            }
         });
     </script>
 </body>
