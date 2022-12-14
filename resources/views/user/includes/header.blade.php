@@ -327,7 +327,7 @@
                         <!-- item-->
                         <h6 class="dropdown-header">Welcome Anna!</h6>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+                        <a class="dropdown-item" href="{{ route('user_logout')}}"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
                     </div>
                 </div>
             </div>

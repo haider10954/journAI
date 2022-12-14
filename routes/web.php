@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\user\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,22 +16,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('user.index');
-})->name('index');
-
-Route::get('/notes', function () {
-    return view('user.notes');
-})->name('notes');
-
-Route::get('/view-notes', function () {
-    return view('user.view_note');
-})->name('view_notes');
-
-Route::get('/login', function () {
     return view('user.login');
-})->name('login');
+})->name('user_login');
 
-
-Route::get('/register', function () {
+Route::post('/user-login', [AuthController::class, 'user_login'])->name('user-login');
+Route::get('/logout',[AuthController::class , 'logout'])->name('user_logout');
+Route::get('/user/register', function () {
     return view('user.register');
-})->name('register');
+})->name('user_register');
+Route::post('/user-signup', [AuthController::class, 'user_signUp'])->name('user_signUp');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/index', function () {
+        return view('user.index');
+    })->name('index');
+
+    Route::get('/notes', function () {
+        return view('user.notes');
+    })->name('notes');
+
+    Route::get('/view-notes', function () {
+        return view('user.view_note');
+    })->name('view_notes');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

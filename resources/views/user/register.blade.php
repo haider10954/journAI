@@ -76,29 +76,25 @@
                                             <h5 class="text-primary">Register Account</h5>
                                             <p class="text-muted">Get your Free JournAI account now.</p>
                                         </div>
-
+                                        <div class="prompt"></div>
                                         <div class="mt-4">
-                                            <form class="needs-validation" novalidate>
-
+                                            <form id="registerForm">
+                                                @csrf
                                                 <div class="mb-3">
                                                     <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter email address" required>
-                                                    <div class="invalid-feedback">
-                                                        Please enter email
-                                                    </div>
+                                                    <input type="email" class="form-control" id="useremail" placeholder="Enter email address" name="email">
+                                                    <div class="error-email"></div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="username" placeholder="Enter username" required>
-                                                    <div class="invalid-feedback">
-                                                        Please enter username
-                                                    </div>
+                                                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="name">
+                                                    <div class="error-name"></div>
                                                 </div>
 
                                                 <div class="mb-3">
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Enter password" id="password-input" aria-describedby="passwordInput" name="password">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                         <div class="invalid-feedback">
                                                             Please enter password
@@ -109,7 +105,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="password-input">Confirm Password</label>
                                                     <div class="position-relative auth-pass-inputgroup">
-                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Confirm password" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                        <input type="password" class="form-control pe-5 password-input" onpaste="return false" placeholder="Confirm password" id="password-input" aria-describedby="passwordInput" name="confirm_password">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                         <div class="invalid-feedback">
                                                             Please enter password again
@@ -127,7 +123,7 @@
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <a class="btn btn-success w-100" type="submit" href="{{ route('login') }}">Sign Up</a>
+                                                    <button type="submit" id="submitForm" class="btn btn-success w-100" type="submit" href="{{ route('login') }}">Sign Up</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -171,6 +167,56 @@
     <!-- end auth-page-wrapper -->
 
     @include('user.includes.script')
+    <script>
+        $("#registerForm").on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData($("#registerForm")[0]);
+            formData = new FormData($("#registerForm")[0]);
+            $.ajax({
+                type: "POST",
+                url: "{{ route('user_signUp') }}",
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                cache: false,
+                data: formData,
+                beforeSend: function() {
+                    $("#submitForm").prop('disabled', true);
+                    $("#submitForm").html('<i class="fa fa-spinner fa-spin me-1"></i> Processing');
+                },
+                success: function(res) {
+                    $("#submitForm").attr('class', 'btn btn-success');
+                    $("#submitForm").html('<i class="fa fa-check me-1"></i>  Student Registered</>');
+                    if (res.success) {
+                        $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
+                        setTimeout(function() {
+                            $('html, body').animate({
+                                scrollTop: $("html, body").offset().top
+                            }, 1000);
+                        }, 1500);
+
+                        setTimeout(function() {
+                            $('.prompt').hide()
+                            window.location.href = "{{ route('user_login') }}";
+                        }, 4000);
+
+                    } else {}
+                },
+                error: function(e) {
+                    $("#submitForm").prop('disabled', false);
+                    $("#submitForm").html('Register');
+                    if (e.responseJSON.errors['name']) {
+                        $('.error-name').html('<small class=" error-message text-danger">' + e.responseJSON.errors['name'][0] + '</small>');
+                    }
+                    if (e.responseJSON.errors['email']) {
+                        $('.error-email').html('<small class=" error-message text-danger">' + e.responseJSON.errors['email'][0] + '</small>');
+                    }
+                }
+
+            });
+        });
+    </script>
+
 </body>
 
 </html>

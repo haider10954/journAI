@@ -78,13 +78,14 @@
                                             <h5 class="text-primary">Welcome Back !</h5>
                                             <p class="text-muted">Sign in to continue to JournAI.</p>
                                         </div>
-
+                                        <div class="prompt"></div>
                                         <div class="mt-4">
-                                            <form>
-
+                                            <form id="loginForm">
+                                                @csrf
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                                    <label for="username" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" placeholder="Enter email" name="email">
+                                                    <div class="error-email"></div>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -93,9 +94,10 @@
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password" class="form-control pe-5" placeholder="Enter password" id="password-input">
+                                                        <input type="password" class="form-control pe-5" placeholder="Enter password" id="password-input" name="password">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                     </div>
+                                                    <div class="error-password"></div>
                                                 </div>
 
                                                 <div class="form-check">
@@ -104,7 +106,7 @@
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <a class="btn btn-success w-100" type="submit" href="{{route('index') }}">Log In</a>
+                                                    <button type="submit" id="submitForm" class="btn btn-success w-100" type="submit" href="{{route('index') }}">Log In</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -150,6 +152,64 @@
     <!-- end auth-page-wrapper -->
 
     @include('user.includes.script')
+    <script>
+        $("#loginForm").on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData($("#loginForm")[0]);
+            formData = new FormData($("#loginForm")[0]);
+            $.ajax({
+                type: "POST",
+                url: "{{ route('user-login') }}",
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                cache: false,
+                data: formData,
+                beforeSend: function() {
+                    $("#submitForm").prop('disabled', true);
+                    $("#submitForm").html('<i class="fa fa-spinner fa-spin me-1"></i> Processing');
+                },
+                success: function(res) {
+                    $("#submitForm").attr('class', 'btn btn-success');
+                    if (res.success) {
+                        $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
+                        setTimeout(function() {
+                            $('html, body').animate({
+                                scrollTop: $("html, body").offset().top
+                            }, 1000);
+                        }, 1500);
+
+                        setTimeout(function() {
+                            $('.prompt').hide()
+                            window.location.href = "{{ route('index') }}";
+                        }, 4000);
+                        $('.prompt').show()
+
+                    } else {
+                        $('.prompt').html('<div class="alert alert-danger mb-3">' + res.message + '</div>');
+
+                        setTimeout(function() {
+                            $('.prompt').hide()
+                        }, 2000);
+                        $('.prompt').show()
+                        $("#submitForm").prop('disabled', false);
+                        $("#submitForm").html('Login');
+                    }
+                },
+                error: function(e) {
+                    $("#submitForm").prop('disabled', false);
+                    $("#submitForm").html('Login');
+                    if (e.responseJSON.errors['email']) {
+                        $('.error-email').html('<small class=" error-message text-danger">' + e.responseJSON.errors['email'][0] + '</small>');
+                    }
+                    if (e.responseJSON.errors['password']) {
+                        $('.error-password').html('<small class=" error-message text-danger">' + e.responseJSON.errors['password'][0] + '</small>');
+                    }
+                }
+
+            });
+        });
+    </script>
 </body>
 
 </html>
