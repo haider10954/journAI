@@ -85,7 +85,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label">Hobbies</label>
-                                        <input class="form-control" id="hobbies" name="hobbies" type="text" value="{{ auth()->user()->getHobbiesJsonString('hobbies') }}" />
+                                        <input class="form-control" id="hobbies" name="hobbies" type="text" value="{{ (empty(auth()->user()->hobbies)) ? '' : auth()->user()->getHobbiesJsonString('hobbies') }}" />
                                         <div class="error-hobby"></div>
                                     </div>
                                 </div>
