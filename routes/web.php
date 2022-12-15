@@ -20,7 +20,7 @@ Route::get('/', function () {
 })->name('user_login');
 
 Route::post('/user-login', [AuthController::class, 'user_login'])->name('user-login');
-Route::get('/logout',[AuthController::class , 'logout'])->name('user_logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('user_logout');
 Route::get('/user/register', function () {
     return view('user.register');
 })->name('user_register');
@@ -39,6 +39,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/view-notes', function () {
         return view('user.view_note');
     })->name('view_notes');
+
+    Route::get('/user-profile', function () {
+        return view('user.user_profile');
+    })->name('user_profile');
+
+    Route::get('/user-profile/update', function () {
+        return view('user.update_profile');
+    })->name('update_profile');
+    Route::post('/update_profile', [AuthController::class, 'update_profile'])->name('update-profile');
 });
 
 Auth::routes();

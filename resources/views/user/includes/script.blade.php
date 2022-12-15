@@ -30,10 +30,16 @@
 <script src="{{ asset('assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
 <script src="{{ asset('assets/js/pages/form-file-upload.init.js') }}"></script>
 
+
+
 <!-- Dashboard init -->
 <script src="{{ asset('assets/js/pages/dashboard-analytics.init.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+<!-- Tagify -->
+<script src="{{ asset('assets/js/jQuery.tagify.min.js') }}"></script>
 
 <!-- App js -->
 <script src="{{ asset('assets/js/app.js') }}"></script>

@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="{{ asset('assets/libs/filepond/filepond.min.css') }}" type="text/css" />
 <link rel="stylesheet" href="{{ asset('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css') }}">
 
+<!-- Tagify -->
+<link rel="stylesheet" href="{{ asset('assets/css/tagify.css') }}">
+
 <!-- Layout config Js -->
 <script src="{{ asset('assets/js/layout.js') }}"></script>
 <!-- Bootstrap Css -->
