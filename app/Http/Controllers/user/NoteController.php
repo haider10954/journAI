@@ -13,9 +13,9 @@ class NoteController extends Controller
     {
 
         $notes = Note::where('user_id', auth()->id())->get();
-        $response = Http::post('http://3.140.248.219:8000/predict_api', [
-            'text' => 'Hello',
-        ]);
+        // $response = Http::asForm()->post('http://3.140.248.219:8000/predict_api', [
+        //     'text' => 'Hello',
+        // ]);
         return view('user.notes', compact('notes'));
     }
     function upload_files($file)
