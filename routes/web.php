@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\user\AuthController;
+use App\Http\Controllers\user\NoteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,9 +33,9 @@ Route::middleware('auth')->group(function () {
         return view('user.index');
     })->name('index');
 
-    Route::get('/notes', function () {
-        return view('user.notes');
-    })->name('notes');
+    //Notes
+    Route::get('/notes', [NoteController::class, 'notes_listing'])->name('notes');
+    Route::post('/add-note', [NoteController::class, 'add_note'])->name('add-note');
 
     Route::get('/view-notes', function () {
         return view('user.view_note');

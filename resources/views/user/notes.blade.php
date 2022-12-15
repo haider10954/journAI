@@ -54,12 +54,13 @@
 <!--end card-->
 
 <div class="row mb-3">
-    <div class="col-lg-4 mb-3" id="openAI">
+    @foreach($notes as $note)
+    <div class="col-lg-4 mb-3 openAI">
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="my_note">
                     <div class="d-flex mb-2">
-                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" class="d-block">Note Title</a></h6>
+                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" class="d-block">{{ $note->title}}</a></h6>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
@@ -69,7 +70,7 @@
                             </ul>
                         </div>
                     </div>
-                    <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
+                    <p class="text-muted">{{ $note->description }}.</p>
                     <div class="mb-3">
                         <div class="d-flex mb-1">
                             <div class="flex-grow-1">
@@ -85,16 +86,20 @@
                     </div>
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <span class="badge badge-soft-primary">User Name</span>
+                            <span class="badge badge-soft-primary">{{ auth()->user()->fullname }}</span>
                         </div>
                         <div class="flex-shrink-0">
                             <div class="avatar-group">
+                                @if(!empty(auth()->user()->photo))
+                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                    <img src="{{ asset('storage/user/'.auth()->user()->photo) }}" alt="" class="rounded-circle avatar-xxs">
+                                </a>
+                                @else
                                 <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
                                     <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
                                 </a>
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
-                                    <img src="{{ asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                                </a>
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -102,10 +107,10 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 mb-3" style="display: none;" id="AI">
+    <div class="col-lg-4 mb-3 AI" style="display: none;">
         <div class="card h-100">
             <div class="card-body">
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
+                <h6 class="mb-3 fw-semibold text-uppercase">Neutral</h6>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="mb-3">
@@ -138,219 +143,7 @@
                     </div>
                 </div>
 
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-end">
-                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 mb-3" id="openAI2">
-        <div class="card tasks-box h-100">
-            <div class="card-body">
-                <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" id="openAI2" class="d-block">Note Title</a></h6>
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                            <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
-                <div class="mb-3">
-                    <div class="d-flex mb-1">
-                        <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">25% </span>of AI Analytics</h6>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <span class="text-muted">03 Jan, 2022</span>
-                        </div>
-                    </div>
-                    <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <span class="badge badge-soft-primary">User Name</span>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <div class="avatar-group">
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
-                                <img src="{{ asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 mb-3" style="display: none;" id="AI2">
-        <div class="card h-100">
-            <div class="card-body">
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 45%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> approval 45%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 25%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-end">
-                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 mb-3" id="openAI3">
-        <div class="card tasks-box h-100">
-            <div class="card-body">
-                <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a class="d-block">Note Title</a></h6>
-                    <div class="dropdown">
-                        <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                            <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                            <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <p class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
-                <div class="mb-3">
-                    <div class="d-flex mb-1">
-                        <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">25% </span>of AI Analytics</h6>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <span class="text-muted">03 Jan, 2022</span>
-                        </div>
-                    </div>
-                    <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <span class="badge badge-soft-primary">User Name</span>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <div class="avatar-group">
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Nancy">
-                                <img src="{{ asset('assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 mb-3" style="display: none;" id="AI3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Analytics</h6>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 45%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> approval 45%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h6 class="mb-3 fw-semibold text-uppercase">AI Normal</h6>
+                <h6 class="mb-3 fw-semibold text-uppercase">Approval</h6>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="mb-3">
@@ -374,6 +167,8 @@
             </div>
         </div>
     </div>
+    @endforeach
+    <!-- Notes Dynamic -->
 </div>
 
 
@@ -386,74 +181,39 @@
                 <button type="button" class="btn-close" id="addBoardBtn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="#">
+                <div class="prompt"></div>
+                <form id="noteForm">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <label for="boardName" class="form-label">Note Title</label>
                             <input type="text" class="form-control" placeholder="Enter Note title" name="title">
+                            <div class="error-title"></div>
                         </div>
 
                         <div class="col-lg-12">
                             <label for="boardName" class="form-label">Note Description</label>
                             <textarea class="form-control" placeholder="Enter description" name="description" rows="5" style="resize: none;"></textarea>
+                            <div class="error-description"></div>
                         </div>
 
                         <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title mb-0">Upload Image</h4>
-                                </div><!-- end card header -->
+                            <label for="boardName" class="form-label">Upload Image</label>
+                            <input class="form-control" type="file" name="file" id="main_picture">
 
-                                <div class="card-body">
-                                    <div class="dropzone">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple="multiple">
-                                        </div>
-                                        <div class="dz-message needsclick">
-                                            <div class="mb-3">
-                                                <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                            </div>
-
-                                            <h4>Drop files here or click to upload.</h4>
-                                        </div>
-                                    </div>
-
-                                    <ul class="list-unstyled mb-0" id="dropzone-preview">
-                                        <li class="mt-2" id="dropzone-preview-list">
-                                            <!-- This is used as the file preview template -->
-                                            <div class="border rounded">
-                                                <div class="d-flex p-2">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar-sm bg-light rounded">
-                                                            <img data-dz-thumbnail class="img-fluid rounded d-block" src="#" alt="Dropzone-Image" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <div class="pt-1">
-                                                            <h5 class="fs-14 mb-1" data-dz-name>&nbsp;</h5>
-                                                            <p class="fs-13 text-muted mb-0" data-dz-size></p>
-                                                            <strong class="error text-danger" data-dz-errormessage></strong>
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-shrink-0 ms-3">
-                                                        <button data-dz-remove class="btn btn-sm btn-danger">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <!-- end dropzon-preview -->
+                            <div class="preview-img mt-4">
+                                <div id="main_image_view" class="h-100">
+                                    <p class="d-flex align-items-center h-100 justify-content-center fw-bold fs-4">Preview Image</p>
                                 </div>
-                                <!-- end card body -->
                             </div>
-                            <!-- end card -->
-                        </div>
 
+                            <div class="error-image"></div>
+                        </div>
 
                         <div class="mt-4">
                             <div class="hstack gap-2 justify-content-end">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" id="addNewBoard">Add Note</button>
+                                <button type="submit" id="submitForm" class="btn btn-success" id="addNewBoard">Add Note</button>
                             </div>
                         </div>
                     </div>
@@ -515,32 +275,93 @@
 
 @section('custom-script')
 <script>
-    $('#openAI').on('click', function() {
-        if ($(this).next('#AI').css('display') !== 'block') {
-            $(this).next('#AI').fadeIn();
+    $('.openAI').on('click', function() {
+        if ($(this).next('.AI').css('display') !== 'block') {
+            $('.AI').hide();
+            $(this).next('.AI').fadeIn();
         } else {
-            $(this).next('#AI').fadeOut();
+            $(this).next('.AI').fadeOut();
         }
 
     });
 
-    $('#openAI2').on('click', function() {
-        if ($(this).next('#AI2').css('display') !== 'block') {
-            $(this).next('#AI2').fadeIn();
-        } else {
-            $(this).next('#AI2').fadeOut();
-        }
+    $("#noteForm").on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData($("#noteForm")[0]);
+        formData = new FormData($("#noteForm")[0]);
+        $.ajax({
+            type: "POST",
+            url: "{{ route('add-note') }}",
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: formData,
+            mimeType: "multipart/form-data",
+            beforeSend: function() {
+                $("#submitForm").prop('disabled', true);
+                $("#submitForm").html('<i class="fa fa-spinner fa-spin me-1"></i> Processing');
+            },
+            success: function(res) {
+                $("#submitForm").attr('class', 'btn btn-success');
+                if (res.success) {
+                    $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
+                    setTimeout(function() {
+                        $('html, body').animate({
+                            scrollTop: $("html, body").offset().top
+                        }, 1000);
+                    }, 1500);
 
+                    setTimeout(function() {
+                        $('.prompt').hide()
+                    }, 3000);
+
+                    window.location.reload();
+                    $('.prompt').show()
+
+                } else {
+                    $('.prompt').html('<div class="alert alert-danger mb-3">' + res.message + '</div>');
+                    setTimeout(function() {
+                        $('html, body').animate({
+                            scrollTop: $("html, body").offset().top
+                        }, 1000);
+                    }, 1500);
+
+                    setTimeout(function() {
+                        $('.prompt').hide()
+                    }, 3000);
+
+                    $('.prompt').show()
+                }
+            },
+            error: function(e) {
+                $("#submitForm").prop('disabled', false);
+                if (e.responseJSON.errors['title']) {
+                    $('.error-title').html('<small class=" error-message text-danger">' + e.responseJSON.errors['title'][0] + '</small>');
+                }
+                if (e.responseJSON.errors['description']) {
+                    $('.error-description').html('<small class=" error-message text-danger">' + e.responseJSON.errors['description'][0] + '</small>');
+                }
+                if (e.responseJSON.errors['file']) {
+                    $('.error-image').html('<small class=" error-message text-danger">' + e.responseJSON.errors['file'][0] + '</small>');
+                }
+            }
+
+        });
     });
 
-    $('#openAI3').on('click', function() {
-        if ($(this).next('#AI3').css('display') !== 'block') {
-            $(this).next('#AI3').fadeIn();
-        } else {
-            $(this).next('#AI3').fadeOut();
-        }
+    $("#main_picture").on("change", function(e) {
 
-    });
+        f = Array.prototype.slice.call(e.target.files)[0]
+        let reader = new FileReader();
+        reader.onload = function(e) {
+
+            $("#main_image_view").html(`<img style="height: 100%; object-fit: contain;"  id="main_image_preview"  src="${e.target.result}" class="main_image_preview img-block- img-fluid w-100">`);
+        }
+        reader.readAsDataURL(f);
+
+
+    })
 </script>
 
 @endsection

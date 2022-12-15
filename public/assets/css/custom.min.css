@@ -28,3 +28,11 @@
 .progress_bar_inner {
     border-radius: 20px !important;
 }
+
+.preview-img {
+    height: 300px;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #bdbdbd;
+}
