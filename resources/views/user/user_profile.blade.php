@@ -86,9 +86,13 @@
                                 <div class="card-body">
                                     <h5 class="card-title mb-4">Hobbies</h5>
                                     <div class="d-flex flex-wrap gap-2 fs-15">
+                                        @if(auth()->user()->hobbies == null)
+                                        <a href="javascript:void(0);" class="badge badge-soft-success">No Hobbies Yet</a>
+                                        @else()
                                         @foreach(json_decode(auth()->user()->hobbies) as $value)
                                         <a href="javascript:void(0);" class="badge badge-soft-success">{{$value}}</a>
                                         @endforeach
+                                        @endif
                                     </div>
                                 </div><!-- end card body -->
                             </div><!-- end card -->

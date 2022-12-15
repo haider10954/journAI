@@ -152,7 +152,7 @@
 
                     setTimeout(function() {
                         $('.prompt').hide()
-                        window.location.href = "{{ route('update_profile') }}"
+                        window.location.href = "{{ route('user_profile') }}";
                     }, 3000);
 
                     $('.prompt').show()
