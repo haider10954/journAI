@@ -55,6 +55,9 @@
 
 <div class="row mb-3">
     @foreach($notes as $note)
+    @php
+    $response = json_decode($note->response);
+    @endphp
     <div class="col-lg-4 mb-3 openAI">
         <div class="card tasks-box h-100">
             <div class="card-body">
@@ -113,54 +116,38 @@
                 <h6 class="mb-3 fw-semibold text-uppercase">Neutral</h6>
                 <div class="row">
                     <div class="col-lg-12">
+                        @foreach($response->predictions as $k => $v)
+                        @php
+                        $width = round($v * 100, 1);
+                        @endphp
                         <div class="mb-3">
                             <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                            <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                                <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">{{ $k }} {{ $width }}%</span>
+                                <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: {{ $width }}%;" aria-valuenow="25" data-width="{{ $width }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 60%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">disgust 60%</div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 45%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> approval 45%</div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
                 <h6 class="mb-3 fw-semibold text-uppercase">Approval</h6>
                 <div class="row">
                     <div class="col-lg-12">
+                        @foreach($response->harassment_predictions as $k => $v)
+                        @php
+                        $width = round($v * 100, 1);
+                        @endphp
                         <div class="mb-3">
                             <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 90%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Neutral 90%</div>
+                            <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                                <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">{{ $k }} {{ $width }}%</span>
+                                <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: {{ $width }}%;" aria-valuenow="25" data-width="{{ $width }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar">
-                                <div class="progress-bar progress_bar_inner" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Annoyance 50%</div>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="d-flex align-items-end justify-content-end">
-                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" href="#suggestionModal">Suggestion</button>
+                            <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions }}" href="#suggestionModal">Suggestion</button>
                         </div>
                     </div>
                 </div>
@@ -258,7 +245,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages</p>
+                <p id="response-text"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -275,6 +262,15 @@
 
 @section('custom-script')
 <script>
+    $('.response_suggestion').on('click', function() {
+        $('#response-text').text($(this).attr('data-suggestion'));
+    });
+    $('.progress-bar-record').each(function() {
+        if ($(this).attr('data-width') >= 60) {
+            $(this).prev('.progress-span-label').addClass('text-white');
+        }
+    });
+
     $('.openAI').on('click', function() {
         if ($(this).next('.AI').css('display') !== 'block') {
             $('.AI').hide();
