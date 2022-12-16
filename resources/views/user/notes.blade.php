@@ -75,36 +75,38 @@
                         </div>
                     </div>
                     <p class="text-muted">{{ $note->description }}.</p>
-                    <div class="mb-3">
-                        <div class="d-flex mb-1">
-                            <div class="flex-grow-1">
-                                <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of AI Analytics</h6>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <span class="text-muted">03 Jan, 2022</span>
-                            </div>
-                        </div>
-                        <div class="progress rounded-3 progress-sm">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center">
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="mb-3">
+                    <div class="d-flex mb-1">
                         <div class="flex-grow-1">
-                            <span class="badge badge-soft-primary">{{ auth()->user()->fullname }}</span>
+                            <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of AI Analytics</h6>
                         </div>
                         <div class="flex-shrink-0">
-                            <div class="avatar-group">
-                                @if(!empty(auth()->user()->photo))
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                    <img src="{{ asset('storage/user/'.auth()->user()->photo) }}" alt="" class="rounded-circle avatar-xxs">
-                                </a>
-                                @else
-                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                    <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                                </a>
-                                @endif
+                            <span class="text-muted">03 Jan, 2022</span>
+                        </div>
+                    </div>
+                    <div class="progress rounded-3 progress-sm">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <span class="badge badge-soft-primary">{{ auth()->user()->fullname }}</span>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <div class="avatar-group">
+                            @if(!empty(auth()->user()->photo))
+                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                <img src="{{ asset('storage/user/'.auth()->user()->photo) }}" alt="" class="rounded-circle avatar-xxs">
+                            </a>
+                            @else
+                            <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
+                            </a>
+                            @endif
 
-                            </div>
                         </div>
                     </div>
                 </div>
