@@ -57,6 +57,7 @@
     @foreach($notes as $note)
     @php
     $response = json_decode($note->response);
+    $first_width = round($response->predictions->neutral * 100, 1);
     @endphp
     <div class="col-lg-4 mb-3 openAI">
         <div class="card tasks-box h-100">
@@ -77,14 +78,14 @@
                     <div class="mb-3">
                         <div class="d-flex mb-1">
                             <div class="flex-grow-1">
-                                <h6 class="text-muted mb-0"><span class="text-secondary">25% </span>of AI Analytics</h6>
+                                <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of AI Analytics</h6>
                             </div>
                             <div class="flex-shrink-0">
                                 <span class="text-muted">03 Jan, 2022</span>
                             </div>
                         </div>
                         <div class="progress rounded-3 progress-sm">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
