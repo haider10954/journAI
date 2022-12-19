@@ -69,7 +69,7 @@
                             <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                 <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                                <li><a class="dropdown-item editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
                                 <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
                             </ul>
                         </div>
@@ -271,6 +271,58 @@
 <!--end modal -->
 
 
+<!-- Edit Note -->
+<div class="modal fade" id="editModalNote" tabindex="-1" aria-labelledby="createboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header p-3 bg-soft-info">
+                <h5 class="modal-title" id="createboardModalLabel">Edit Notes</h5>
+                <button type="button" class="btn-close" id="addBoardBtn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="prompt"></div>
+                <form id="editNoteForm">
+                    @csrf
+                    <input type="hidden" name="id" id="id">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label for="boardName" class="form-label">Note Title</label>
+                            <input type="text" id="title" class="form-control" placeholder="Enter Note title" name="title">
+                            <div class="error-title"></div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="boardName" class="form-label">Note Description</label>
+                            <textarea class="form-control" placeholder="Enter description" name="description" rows="5" id="description" style="resize: none;"></textarea>
+                            <div class="error-description"></div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="boardName" class="form-label">Upload Image</label>
+                            <input class="form-control" type="file" name="file" id="pic">
+
+                            <div class="preview-img mt-4">
+                                <div id="image_view" class="h-100 text-center">
+                                    <img src="" class="img-fluid h-100" id="imagepreview">
+                                </div>
+                            </div>
+
+                            <div class="error-image"></div>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="hstack gap-2 justify-content-end">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" id="submitForm" class="btn btn-success" id="addNewBoard">Update Note</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Edit Note -->
 
 @endsection
 
@@ -279,6 +331,15 @@
     $('.response_suggestion').on('click', function() {
         $('#response-text').text($(this).attr('data-suggestion'));
     });
+
+    $('.editBtn').on('click', function() {
+        $('#id').val($(this).attr('data-id'));
+        $('#title').val($(this).attr('data-title'));
+        $('#description').text($(this).attr('data-description'));
+        var image = $(this).attr('data-image');
+        $('#imagepreview').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
+    });
+
     $('.progress-bar-record').each(function() {
         if ($(this).attr('data-width') >= 60) {
             $(this).prev('.progress-span-label').addClass('text-white');
@@ -350,6 +411,71 @@
         });
     });
 
+    $("#editNoteForm").on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData($("#editNoteForm")[0]);
+        formData = new FormData($("#editNoteForm")[0]);
+        $.ajax({
+            type: "POST",
+            url: "{{ route('edit-note') }}",
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: formData,
+            mimeType: "multipart/form-data",
+            beforeSend: function() {
+                $("#submitForm").prop('disabled', true);
+                $("#submitForm").html('<i class="fa fa-spinner fa-spin me-1"></i> Processing');
+            },
+            success: function(res) {
+                $("#submitForm").attr('class', 'btn btn-success');
+                if (res.success) {
+                    $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
+                    setTimeout(function() {
+                        $('html, body').animate({
+                            scrollTop: $("html, body").offset().top
+                        }, 1000);
+                    }, 1500);
+
+                    setTimeout(function() {
+                        $('.prompt').hide()
+                    }, 3000);
+
+                    window.location.reload();
+                    $('.prompt').show()
+
+                } else {
+                    $('.prompt').html('<div class="alert alert-danger mb-3">' + res.message + '</div>');
+                    setTimeout(function() {
+                        $('html, body').animate({
+                            scrollTop: $("html, body").offset().top
+                        }, 1000);
+                    }, 1500);
+
+                    setTimeout(function() {
+                        $('.prompt').hide()
+                    }, 3000);
+
+                    $('.prompt').show()
+                }
+            },
+            error: function(e) {
+                $("#submitForm").prop('disabled', false);
+                if (e.responseJSON.errors['title']) {
+                    $('.error-title').html('<small class=" error-message text-danger">' + e.responseJSON.errors['title'][0] + '</small>');
+                }
+                if (e.responseJSON.errors['description']) {
+                    $('.error-description').html('<small class=" error-message text-danger">' + e.responseJSON.errors['description'][0] + '</small>');
+                }
+                if (e.responseJSON.errors['file']) {
+                    $('.error-image').html('<small class=" error-message text-danger">' + e.responseJSON.errors['file'][0] + '</small>');
+                }
+            }
+
+        });
+    });
+
     $("#main_picture").on("change", function(e) {
 
         f = Array.prototype.slice.call(e.target.files)[0]
@@ -357,6 +483,19 @@
         reader.onload = function(e) {
 
             $("#main_image_view").html(`<img style="height: 100%; object-fit: contain;"  id="main_image_preview"  src="${e.target.result}" class="main_image_preview img-block- img-fluid w-100">`);
+        }
+        reader.readAsDataURL(f);
+
+
+    })
+
+    $("#pic").on("change", function(e) {
+
+        f = Array.prototype.slice.call(e.target.files)[0]
+        let reader = new FileReader();
+        reader.onload = function(e) {
+
+            $("#image_view").html(`<img style="height: 100%; object-fit: contain;"  id="image_preview"  src="${e.target.result}" class="main_image_preview img-block- img-fluid w-100">`);
         }
         reader.readAsDataURL(f);
 

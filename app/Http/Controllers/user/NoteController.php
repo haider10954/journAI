@@ -58,4 +58,44 @@ class NoteController extends Controller
             ]);
         }
     }
+
+    public function edit_note(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'file' => 'mimes:jpg,jpeg,png'
+        ]);
+
+        $data = [];
+
+        if (isset($request->title)) {
+            $data['title'] = $request->title;
+        }
+
+        if (isset($request->description)) {
+            $data['description'] = $request->description;
+        }
+
+        if (isset($request->file)) {
+            if ($request->hasFile('file')) {
+                $file = $this->upload_files($request['file']);
+                $data['image'] = $file;
+            }
+        }
+
+        $note = Note::where('id', $request->id)->update($data);
+
+        if ($note) {
+            return json_encode([
+                'success' => true,
+                'message' => 'Note has been updated successfully',
+            ]);
+        } else {
+            return json_encode([
+                'success' => false,
+                'message' => 'Something went wrong Please try again.',
+            ]);
+        }
+    }
 }

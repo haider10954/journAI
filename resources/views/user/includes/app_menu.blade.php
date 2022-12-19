@@ -31,25 +31,25 @@
             </div>
             <ul class="navbar-nav justify-content-center" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('index') }}">
+                    <a class="nav-link menu-link @if(\Request::route()->getName() == 'index') active @endif" href="{{ route('index') }}">
                         <i class="ri-apps-2-line"></i> <span data-key="t-apps">Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="javascript:void()">
+                    <a class="nav-link menu-link " href="javascript:void()">
                         <i class="ri-layout-3-line"></i> <span data-key="t-apps">Get Expert Advice On-Demand</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('notes') }}">
+                    <a class="nav-link menu-link @if(\Request::route()->getName() == 'notes') active @endif" href="{{ route('notes') }}">
                         <i class="ri-account-circle-line"></i> <span data-key="t-apps">My Notes</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarApps">
+                    <a class="nav-link menu-link" href="{{ route('user_logout') }}">
                         <i class="ri-pages-line"></i> <span data-key="t-apps">Logout</span>
                     </a>
                 </li>
