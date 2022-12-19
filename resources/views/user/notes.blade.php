@@ -33,7 +33,7 @@
                         <div class="row g-3 mb-0 align-items-center">
                             <div class="col-sm-auto">
                                 <div class="input-group">
-                                    <input id="range" class="form-control border-0">
+                                    <input id="range" class="form-control border-0" placeholder="Select Date">
                                     <div class="input-group-text bg-primary border-primary text-white">
                                         <i class="ri-calendar-2-line"></i>
                                     </div>
