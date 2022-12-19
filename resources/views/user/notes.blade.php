@@ -512,7 +512,9 @@
                             setTimeout(function() {
                                 Swal.fire('Success!', res.Message, 'success');
                             }, 1500);
-                            window.location.reload();
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 2000);
                         } else {}
                     },
                     error: function(e) {}
