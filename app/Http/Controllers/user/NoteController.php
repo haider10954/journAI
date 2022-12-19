@@ -106,4 +106,25 @@ class NoteController extends Controller
             ]);
         }
     }
+
+    public function delete_note(Request $request)
+    {
+        $notes = Note::where('id', $request->id)->first();
+        $filePath = storage_path('app/public/notes/' . $notes->image);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+        $note = Note::where('id', $request->id)->delete();
+        if ($note) {
+            return json_encode([
+                'success' => true,
+                'message' => 'Note has been deleted successfully',
+            ]);
+        } else {
+            return json_encode([
+                'success' => false,
+                'message' => 'Something went wrong Please try again.',
+            ]);
+        }
+    }
 }

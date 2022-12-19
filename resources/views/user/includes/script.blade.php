@@ -16,8 +16,8 @@
 <!-- titcket init js -->
 <script src="{{ asset('assets/js/pages/tasks-list.init.js') }}"></script>
 
-<!-- Sweet Alerts js -->
-<script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- dropzone min -->
 <script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>

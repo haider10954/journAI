@@ -70,7 +70,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                 <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
                                 <li><a class="dropdown-item editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="modal" href="#deleteRecordModal"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
+                                <li><a class="dropdown-item deleteRecord" data-id="{{ $note->id }}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
                             </ul>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                             <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of Neutral</h6>
                         </div>
                         <div class="flex-shrink-0">
-                            <span class="text-muted">03 Jan, 2022</span>
+                            <span class="text-muted">{{ $note->created_at->format('Y-M-d') }}</span>
                         </div>
                     </div>
                     <div class="progress rounded-3 progress-sm">
@@ -249,27 +249,6 @@
     </div>
 </div>
 <!--end modal -->
-
-
-<div class="modal fade zoomIn" id="suggestionModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">AI Suggestion</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="response-text"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!--end modal -->
-
 
 <!-- Edit Note -->
 <div class="modal fade zoomIn" id="editModalNote" tabindex="-1" aria-hidden="true">
@@ -503,6 +482,43 @@
         dateFormat: "Y-m-d",
         mode: "range"
     });
-</script>
 
+
+    $('.deleteRecord').on('click', function() {
+
+        var id = $(this).attr('data-id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('delete-note') }}",
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                        _token: '{{csrf_token()}}',
+                    },
+
+                    beforeSend: function() {},
+                    success: function(res) {
+                        if (res.success == true) {
+                            setTimeout(function() {
+                                Swal.fire('Success!', res.Message, 'success');
+                            }, 1500);
+                            window.location.reload();
+                        } else {}
+                    },
+                    error: function(e) {}
+                });
+            }
+        })
+    });
+</script>
 @endsection

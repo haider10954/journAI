@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/notes', [NoteController::class, 'notes_listing'])->name('notes');
     Route::post('/add-note', [NoteController::class, 'add_note'])->name('add-note');
     Route::post('/update-post', [NoteController::class, 'edit_note'])->name('edit-note');
+    Route::post('/delete-record',[NoteController::class , 'delete_note'])->name('delete-note');
 
     Route::get('/view-notes', function () {
         return view('user.view_note');
