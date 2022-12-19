@@ -59,12 +59,12 @@
     $response = json_decode($note->response);
     $first_width = round($response->predictions->neutral * 100, 1);
     @endphp
-    <div class="col-lg-4 mb-3 openAI">
+    <div class="col-lg-4 mb-3">
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="my_note">
                     <div class="d-flex mb-2">
-                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" class="d-block">{{ $note->title}}</a></h6>
+                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a data-bs-toggle="modal" href="#aiModal" class="d-block">{{ $note->title}}</a></h6>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
@@ -81,7 +81,7 @@
                 <div class="mb-3">
                     <div class="d-flex mb-1">
                         <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of AI Analytics</h6>
+                            <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of Neutral</h6>
                         </div>
                         <div class="flex-shrink-0">
                             <span class="text-muted">03 Jan, 2022</span>
@@ -113,9 +113,19 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 mb-3 AI" style="display: none;">
-        <div class="card h-100">
-            <div class="card-body">
+    @endforeach
+    <!-- Notes Dynamic -->
+</div>
+
+
+<div class="modal" id="aiModal" tabindex="-1" aria-labelledby="aiModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AI Analytics</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 <h6 class="mb-3 fw-semibold text-uppercase">Neutral</h6>
                 <div class="row">
                     <div class="col-lg-12">
@@ -149,16 +159,17 @@
                             </div>
                         </div>
                         @endforeach
-                        <div class="d-flex align-items-end justify-content-end">
-                            <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions }}" href="#suggestionModal">Suggestion</button>
-                        </div>
+
                     </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-end justify-content-end">
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions }}" href="#suggestionModal">Suggestion</button>
                 </div>
             </div>
         </div>
     </div>
-    @endforeach
-    <!-- Notes Dynamic -->
 </div>
 
 
@@ -272,16 +283,6 @@
         if ($(this).attr('data-width') >= 60) {
             $(this).prev('.progress-span-label').addClass('text-white');
         }
-    });
-
-    $('.openAI').on('click', function() {
-        if ($(this).next('.AI').css('display') !== 'block') {
-            $('.AI').hide();
-            $(this).next('.AI').fadeIn();
-        } else {
-            $(this).next('.AI').fadeOut();
-        }
-
     });
 
     $("#noteForm").on('submit', function(e) {
