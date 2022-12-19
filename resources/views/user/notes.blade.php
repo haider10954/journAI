@@ -118,7 +118,7 @@
 </div>
 
 
-<div class="modal" id="aiModal" tabindex="-1" aria-labelledby="aiModal" aria-hidden="true">
+<div class="modal fade zoomIn" id="aiModal" tabindex="-1" aria-labelledby="aiModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -272,7 +272,7 @@
 
 
 <!-- Edit Note -->
-<div class="modal fade" id="editModalNote" tabindex="-1" aria-labelledby="createboardModalLabel" aria-hidden="true">
+<div class="modal fade zoomIn" id="editModalNote" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header p-3 bg-soft-info">
@@ -498,8 +498,6 @@
             $("#image_view").html(`<img style="height: 100%; object-fit: contain;"  id="image_preview"  src="${e.target.result}" class="main_image_preview img-block- img-fluid w-100">`);
         }
         reader.readAsDataURL(f);
-
-
     })
 </script>
 

@@ -67,9 +67,17 @@ class NoteController extends Controller
             'file' => 'mimes:jpg,jpeg,png'
         ]);
 
+
+
         $data = [];
 
         if (isset($request->title)) {
+            $response = Http::asForm()->post('http://3.140.248.219:8000/predict_api', [
+                'text' => $request['title'],
+            ]);
+            $getData = $response->collect()->toArray();
+            $data['response'] = json_encode($getData);
+            $data['analytics'] = json_encode($getData['predictions']);
             $data['title'] = $request->title;
         }
 
