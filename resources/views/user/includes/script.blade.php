@@ -37,6 +37,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 
 <!-- Tagify -->
 <script src="{{ asset('assets/js/jQuery.tagify.min.js') }}"></script>

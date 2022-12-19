@@ -33,7 +33,7 @@
                         <div class="row g-3 mb-0 align-items-center">
                             <div class="col-sm-auto">
                                 <div class="input-group">
-                                    <input type="date" class="form-control border-0">
+                                    <input id="range" class="form-control border-0">
                                     <div class="input-group-text bg-primary border-primary text-white">
                                         <i class="ri-calendar-2-line"></i>
                                     </div>
@@ -313,7 +313,7 @@
                         <div class="mt-4">
                             <div class="hstack gap-2 justify-content-end">
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" id="submitForm" class="btn btn-success" id="addNewBoard">Update Note</button>
+                                <button type="submit" id="editForm" class="btn btn-success" id="addNewBoard">Update Note</button>
                             </div>
                         </div>
                     </div>
@@ -425,18 +425,13 @@
             data: formData,
             mimeType: "multipart/form-data",
             beforeSend: function() {
-                $("#submitForm").prop('disabled', true);
-                $("#submitForm").html('<i class="fa fa-spinner fa-spin me-1"></i> Processing');
+                $("#editForm").prop('disabled', true);
+                $("#editForm").html('<i class="fa fa-spinner fa-spin me-1"></i> Processing');
             },
             success: function(res) {
-                $("#submitForm").attr('class', 'btn btn-success');
+                $("#editForm").attr('class', 'btn btn-success');
                 if (res.success) {
                     $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
-                    setTimeout(function() {
-                        $('html, body').animate({
-                            scrollTop: $("html, body").offset().top
-                        }, 1000);
-                    }, 1500);
 
                     setTimeout(function() {
                         $('.prompt').hide()
@@ -461,7 +456,7 @@
                 }
             },
             error: function(e) {
-                $("#submitForm").prop('disabled', false);
+                $("#editForm").prop('disabled', false);
                 if (e.responseJSON.errors['title']) {
                     $('.error-title').html('<small class=" error-message text-danger">' + e.responseJSON.errors['title'][0] + '</small>');
                 }
@@ -499,6 +494,15 @@
         }
         reader.readAsDataURL(f);
     })
+
+
+
+    $("#range").flatpickr({
+        altInput: true,
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d",
+        mode: "range"
+    });
 </script>
 
 @endsection

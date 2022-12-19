@@ -9,6 +9,9 @@
 <!-- Tagify -->
 <link rel="stylesheet" href="{{ asset('assets/css/tagify.css') }}">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
 <!-- Layout config Js -->
 <script src="{{ asset('assets/js/layout.js') }}"></script>
 <!-- Bootstrap Css -->
