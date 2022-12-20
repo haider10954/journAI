@@ -63,7 +63,7 @@
             <div class="card-body">
                 <div class="my_note">
                     <div class="d-flex mb-2">
-                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a data-bs-toggle="modal" href="#aiModal" class="d-block">{{ $note->title}}</a></h6>
+                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->title}}</a></h6>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
@@ -127,37 +127,14 @@
             <div class="modal-body">
                 <h6 class="mb-3 fw-semibold text-uppercase">Neutral</h6>
                 <div class="row">
-                    <div class="col-lg-12">
-                        @foreach($response->predictions as $k => $v)
-                        @php
-                        $width = round($v * 100, 1);
-                        @endphp
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
-                                <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">{{ $k }} {{ $width }}%</span>
-                                <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: {{ $width }}%;" aria-valuenow="25" data-width="{{ $width }}" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        @endforeach
+                    <div class="col-lg-12 predictions">
                     </div>
                 </div>
 
                 <h6 class="mb-3 fw-semibold text-uppercase">Approval</h6>
                 <div class="row">
-                    <div class="col-lg-12">
-                        @foreach($response->harassment_predictions as $k => $v)
-                        @php
-                        $width = round($v * 100, 1);
-                        @endphp
-                        <div class="mb-3">
-                            <!-- Labels Example -->
-                            <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
-                                <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">{{ $k }} {{ $width }}%</span>
-                                <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: {{ $width }}%;" aria-valuenow="25" data-width="{{ $width }}" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        @endforeach
+                    <div class="col-lg-12 harassment_predictions">
+
 
                     </div>
                 </div>
@@ -190,7 +167,7 @@
     </div>
 </div>
 
-
+<!-- Add Note Modal -->
 <div class="modal fade" id="createboardModal" tabindex="-1" aria-labelledby="createboardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
@@ -247,7 +224,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header p-3 bg-soft-info">
-                <h5 class="modal-title" id="createboardModalLabel">Edit Notes</h5>
+                <h5 class="modal-title" id="editModalNote">Edit Notes</h5>
                 <button type="button" class="btn-close" id="addBoardBtn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -299,11 +276,48 @@
 
 @section('custom-script')
 <script>
+    $('.note-title').on('click', function() {
+        let response = JSON.parse($(this).attr('data-response'));
+        console.log(response);
+        $('.predictions').html('');
+        for (const key in response.predictions) {
+
+            $('.predictions').append(`
+                <div class="mb-3">
+                    <!-- Labels Example -->
+                    <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                        <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.predictions[key]*100).toFixed(1)}%</span>
+                        <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width=${(response.predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            `)
+            console.log(`${key}: ${response.predictions[key]}`);
+        }
+
+        $('.harassment_predictions').html('');
+        for (const key in response.harassment_predictions) {
+            $('.harassment_predictions').append(`
+                    <div class="mb-3">
+                        <!-- Labels Example -->
+                        <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                            <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.harassment_predictions[key]*100).toFixed(1)}%</span>
+                            <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.harassment_predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width=${(response.harassment_predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                `)
+            console.log(`${key}: ${response.harassment_predictions[key]}`);
+        }
+
+    });
+
+    var editModal = new bootstrap.Modal(document.getElementById("editModalNote"), {});
+
     function oepnModal() {
         $('.editBtn').on('click', function() {
+            editModal.show();
             $('#id').val($(this).attr('data-id'));
             $('#title').val($(this).attr('data-title'));
-            $('#description').text($(this).attr('data-description'));
+            $('#description').val($(this).attr('data-description'));
             var image = $(this).attr('data-image');
             $('#imagepreview').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
         });
@@ -601,8 +615,8 @@
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                                         <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
                                                         <li><a class="dropdown-item editBtn" 
-                                                        data-bs-toggle="modal" onclick=(oepnModal())
-                                                        data-bs-target="#editModalNote" href="javascript:void(0)" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                                                        onclick=(oepnModal())
+                                                        href="javascript:void(0)" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
                                                         <li><a onclick=(deleteSweetAlert()) class="dropdown-item deleteRecord" data-id="${data[i].id}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
                                                     </ul>
                                                 </div>
