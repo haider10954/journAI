@@ -57,6 +57,17 @@
     @php
     $response = json_decode($note->response);
     $first_width = round($response->predictions->neutral * 100, 1);
+    $i = 0;
+    $t = '';
+    foreach($response->predictions as $k => $v)
+    {
+    if($i != 0)
+    {
+    break;
+    }
+    $t = $k;
+    $i++;
+    }
     @endphp
     <div class="col-lg-4 mb-3">
         <div class="card tasks-box h-100">
@@ -80,7 +91,7 @@
                 <div class="mb-3">
                     <div class="d-flex mb-1">
                         <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of Prediction</h6>
+                            <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of {{ $t }}</h6>
                         </div>
                         <div class="flex-shrink-0">
                             <span class="text-muted">{{ $note->created_at->format('Y-M-d') }}</span>
