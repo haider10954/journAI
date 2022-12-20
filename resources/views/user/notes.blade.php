@@ -29,21 +29,20 @@
                     <div class="hstack gap-2">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i> Create Note</button>
                     </div>
-                    <form action="javascript:void(0);">
+                    <form id="filterData">
+                        @csrf
                         <div class="row g-3 mb-0 align-items-center">
                             <div class="col-sm-auto">
                                 <div class="input-group">
-                                    <input id="range" class="form-control border-0" placeholder="Select Date">
+                                    <input id="range" class="form-control border-0" placeholder="Select Date" name="select_range">
                                     <div class="input-group-text bg-primary border-primary text-white">
-                                        <i class="ri-calendar-2-line"></i>
+                                        <button type="submit" class="btn btn-sm text-center"><i class="ri-calendar-2-line"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-
-
             </div>
             <!--end col-->
         </div>
@@ -53,7 +52,7 @@
 </div>
 <!--end card-->
 
-<div class="row mb-3">
+<div class="row mb-3 note-box">
     @foreach($notes as $note)
     @php
     $response = json_decode($note->response);
@@ -300,6 +299,57 @@
 
 @section('custom-script')
 <script>
+    function oepnModal() {
+        $('.editBtn').on('click', function() {
+            $('#id').val($(this).attr('data-id'));
+            $('#title').val($(this).attr('data-title'));
+            $('#description').text($(this).attr('data-description'));
+            var image = $(this).attr('data-image');
+            $('#imagepreview').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
+        });
+    }
+
+    function deleteSweetAlert() {
+        $('.deleteRecord').on('click', function() {
+
+            var id = $(this).attr('data-id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('delete-note') }}",
+                        dataType: 'json',
+                        data: {
+                            id: id,
+                            _token: '{{csrf_token()}}',
+                        },
+
+                        beforeSend: function() {},
+                        success: function(res) {
+                            if (res.success == true) {
+                                setTimeout(function() {
+                                    Swal.fire('Success!', res.Message, 'success');
+                                }, 1500);
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 2000);
+                            } else {}
+                        },
+                        error: function(e) {}
+                    });
+                }
+            })
+        });
+    }
+
     $('.response_suggestion').on('click', function() {
         $('#response-text').text($(this).attr('data-suggestion'));
     });
@@ -514,6 +564,101 @@
                 });
             }
         })
+    });
+
+
+    $("#filterData").on('submit', function(e) {
+        $('.loader').removeClass('d-none')
+        e.preventDefault();
+        var formData = new FormData($("#filterData")[0]);
+        formData = new FormData($("#filterData")[0]);
+        $.ajax({
+            type: "POST",
+            url: "{{ route('filter_data') }}",
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: formData,
+            beforeSend: function() {
+                $(".note-box").html('<i class="fa fa-spinner fa-spin me-1"></i>');
+            },
+            success: function(res) {
+                if (res.success == true) {
+                    $('.loader').addClass('d-none')
+                    $('.note-box').html('');
+                    let data = res.data;
+                    for (var i = 0; i < data.length; i++) {
+                        $('.note-box').append(`
+                            <div class="col-lg-4 mb-3">
+                                <div class="card tasks-box h-100">
+                                    <div class="card-body">
+                                        <div class="my_note">
+                                            <div class="d-flex mb-2">
+                                                <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a data-bs-toggle="modal" href="#aiModal" class="d-block">${data[i].title}</a></h6>
+                                                <div class="dropdown">
+                                                    <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                                        <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
+                                                        <li><a class="dropdown-item editBtn" 
+                                                        data-bs-toggle="modal" onclick=(oepnModal())
+                                                        data-bs-target="#editModalNote" href="javascript:void(0)" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                                                        <li><a onclick=(deleteSweetAlert()) class="dropdown-item deleteRecord" data-id="${data[i].id}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="text-muted">${data[i].description}.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="mb-3">
+                                            <div class="d-flex mb-1">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of Neutral</h6>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <span class="text-muted">{{ $note->created_at->format('Y-M-d') }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="progress rounded-3 progress-sm">
+                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <span class="badge badge-soft-primary">{{ auth()->user()->fullname }}</span>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar-group">
+                                                    @if(!empty(auth()->user()->photo))
+                                                    <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                                        <img src="{{ asset('storage/user/'.auth()->user()->photo) }}" alt="" class="rounded-circle avatar-xxs">
+                                                    </a>
+                                                    @else
+                                                    <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                                        <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
+                                                    </a>
+                                                    @endif
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
+                    }
+                } else {
+                    $('.loader').addClass('d-none')
+                    $('.note-box').html(' ')
+                    $('.note-box').append(`
+                    <div class="text-center bg-white">
+                        <img src={{ asset('assets/images/no-data-found.png') }} class="img-fuild" style="height:300px;"></img>
+                    </div>`)
+                }
+            },
+            error: function(e) {}
+        });
     });
 </script>
 @endsection

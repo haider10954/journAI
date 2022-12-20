@@ -39,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-post', [NoteController::class, 'edit_note'])->name('edit-note');
     Route::post('/delete-record',[NoteController::class , 'delete_note'])->name('delete-note');
 
+    //Filter Data
+    Route::post('/search-data' , [NoteController::class ,'filterdata'])->name('filter_data');
+
     Route::get('/view-notes', function () {
         return view('user.view_note');
     })->name('view_notes');

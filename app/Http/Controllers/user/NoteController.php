@@ -5,13 +5,16 @@ namespace App\Http\Controllers\user;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use App\Models\Note;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
     public function notes_listing()
     {
+
         $notes = Note::where('user_id', auth()->id())->get();
+
         return view('user.notes', compact('notes'));
     }
     function upload_files($file)
@@ -124,6 +127,37 @@ class NoteController extends Controller
             return json_encode([
                 'success' => false,
                 'message' => 'Something went wrong Please try again.',
+            ]);
+        }
+    }
+
+    public function filterdata()
+    {
+        $date = null;
+        if (request()->has('select_range')) {
+            $date = explode('to', str_replace(' ', '', request('select_range')));
+        }
+
+        $notes = Note::where('user_id', auth()->id())->when(!empty($date), function ($query) use ($date) {
+            $query->whereBetween('created_at', [$date[0], $date[1]]);
+        })->get();
+
+        if ($notes) {
+            if (count($notes) > 0) {
+                return json_encode([
+                    'success' => true,
+                    'data' => $notes,
+                ]);
+            } else {
+                return json_encode([
+                    'success' => false,
+                    'message' => 'No Record Found',
+                ]);
+            }
+        } else {
+            return json_encode([
+                'success' => false,
+                'message' => 'Something went wrong, Please try again.',
             ]);
         }
     }
