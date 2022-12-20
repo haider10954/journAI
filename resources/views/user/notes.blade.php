@@ -80,7 +80,7 @@
                 <div class="mb-3">
                     <div class="d-flex mb-1">
                         <div class="flex-grow-1">
-                            <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of Neutral</h6>
+                            <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of Prediction</h6>
                         </div>
                         <div class="flex-shrink-0">
                             <span class="text-muted">{{ $note->created_at->format('Y-M-d') }}</span>
@@ -125,13 +125,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h6 class="mb-3 fw-semibold text-uppercase">Neutral</h6>
+                <h6 class="mb-3 fw-semibold text-uppercase">Prediction</h6>
                 <div class="row">
                     <div class="col-lg-12 predictions">
                     </div>
                 </div>
 
-                <h6 class="mb-3 fw-semibold text-uppercase">Approval</h6>
+                <h6 class="mb-3 fw-semibold text-uppercase">Harassment Predictions</h6>
                 <div class="row">
                     <div class="col-lg-12 harassment_predictions">
 
