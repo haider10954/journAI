@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: '{{ $first_width }}%;'" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
