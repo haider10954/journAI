@@ -14,6 +14,7 @@
     <div class="col-xxl-3">
         <div class="card mt-n5">
             <div class="card-body p-4">
+                <div class="prompt mt-3 mb-3"></div>
                 <div class="text-center">
                     <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
                         <img src="{{asset( ''.auth()->user()->userImage())}}" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">
@@ -31,7 +32,6 @@
             <div class="card-body p-4">
                 <div class="tab-content">
                     <div class="tab-pane active">
-                        <div class="prompt"></div>
                         <form id="updateProfile">
                             @csrf
                             <div class="row">
