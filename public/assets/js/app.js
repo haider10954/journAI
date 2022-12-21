@@ -1,7 +1,7 @@
 !(function () {
     var a,
         n,
-        o,
+        n,
         s,
         t,
         d,
