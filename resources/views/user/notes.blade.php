@@ -304,7 +304,6 @@
             `)
             console.log(`${key}: ${response.predictions[key]}`);
         }
-
         $('.harassment_predictions').html('');
         for (const key in response.harassment_predictions) {
             $('.harassment_predictions').append(`
@@ -318,7 +317,6 @@
                 `)
             console.log(`${key}: ${response.harassment_predictions[key]}`);
         }
-
     });
 
     var editModal = new bootstrap.Modal(document.getElementById("editModalNote"), {});
@@ -620,7 +618,7 @@
                                     <div class="card-body">
                                         <div class="my_note">
                                             <div class="d-flex mb-2">
-                                                <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a data-bs-toggle="modal" href="#aiModal" class="d-block">${data[i].title}</a></h6>
+                                                <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">${data[i].title}</a></h6>
                                                 <div class="dropdown">
                                                     <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
