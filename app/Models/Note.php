@@ -10,7 +10,8 @@ class Note extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function getUserName()
+    public function getUser()
     {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

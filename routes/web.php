@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\UserNotesController;
 use App\Http\Controllers\user\AuthController;
 use App\Http\Controllers\user\NoteController;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Admins routes
+
+Route::get('/admin', function () {
+    return view('admin.index');
+})->name('admin_index');
+
+Route::get('/admin/user-notes', [UserNotesController::class, 'index'])->name('admin_user_notes');
+Route::post('/delete-note', [UserNotesController::class, 'delete_notes'])->name('delete_notes');
+
 
 Route::get('/', function () {
     return view('user.login');
@@ -37,10 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/notes', [NoteController::class, 'notes_listing'])->name('notes');
     Route::post('/add-note', [NoteController::class, 'add_note'])->name('add-note');
     Route::post('/update-post', [NoteController::class, 'edit_note'])->name('edit-note');
-    Route::post('/delete-record',[NoteController::class , 'delete_note'])->name('delete-note');
+    Route::post('/delete-record', [NoteController::class, 'delete_note'])->name('delete-note');
 
     //Filter Data
-    Route::post('/search-data' , [NoteController::class ,'filterdata'])->name('filter_data');
+    Route::post('/search-data', [NoteController::class, 'filterdata'])->name('filter_data');
 
     Route::get('/view-notes', function () {
         return view('user.view_note');
