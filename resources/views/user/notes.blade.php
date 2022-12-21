@@ -36,7 +36,7 @@
                                 <div class="input-group">
                                     <input id="range" class="form-control border-0" placeholder="Select Date" name="select_range">
                                     <div class="input-group-text bg-primary border-primary text-white">
-                                        <button type="submit" class="btn btn-sm text-center"><i class="ri-calendar-2-line"></i></button>
+                                        <button type="submit" class="btn btn-sm text-center"><i class="ri-google-play-fill"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,24 @@
     @foreach($notes as $note)
     @php
     $response = json_decode($note->response);
-    $first_width = round($response->predictions->neutral * 100, 1);
+    $count = 0 ;
+    $first_value = '' ;
+
+    foreach($response->predictions as $key1=>$value)
+    {
+
+    if($count == 0)
+    {
+    $first_value = $value;
+    }
+    $count++;
+    break;
+    }
+
+
+
+
+    $first_width = round($first_value * 100, 1);
     $i = 0;
     $t = '';
     foreach($response->predictions as $k => $v)
@@ -98,7 +115,7 @@
                         </div>
                     </div>
                     <div class="progress rounded-3 progress-sm">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: '{{ $first_width }}%;'" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
@@ -145,8 +162,6 @@
                 <h6 class="mb-3 fw-semibold text-uppercase">Harassment Predictions</h6>
                 <div class="row">
                     <div class="col-lg-12 harassment_predictions">
-
-
                     </div>
                 </div>
             </div>
@@ -298,7 +313,7 @@
                     <!-- Labels Example -->
                     <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
                         <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.predictions[key]*100).toFixed(1)}%</span>
-                        <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width=${(response.predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             `)
@@ -311,67 +326,88 @@
                         <!-- Labels Example -->
                         <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
                             <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.harassment_predictions[key]*100).toFixed(1)}%</span>
-                            <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.harassment_predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width=${(response.harassment_predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.harassment_predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.harassment_predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 `)
             console.log(`${key}: ${response.harassment_predictions[key]}`);
         }
+        setProgressColor()
     });
 
+    function showResponse(a) {
+        let response = JSON.parse(a.next('.response').html());
+        console.log(response);
+        $('.predictions').html('');
+        for (const key in response.predictions) {
+
+            $('.predictions').append(`
+                <div class="mb-3">
+                    <!-- Labels Example -->
+                    <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                        <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.predictions[key]*100).toFixed(1)}%</span>
+                        <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            `)
+            console.log(`${key}: ${response.predictions[key]}`);
+        }
+        $('.harassment_predictions').html('');
+        for (const key in response.harassment_predictions) {
+            $('.harassment_predictions').append(`
+                    <div class="mb-3">
+                        <!-- Labels Example -->
+                        <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                            <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.harassment_predictions[key]*100).toFixed(1)}%</span>
+                            <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.harassment_predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.harassment_predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                `)
+            console.log(`${key}: ${response.harassment_predictions[key]}`);
+        }
+        setProgressColor()
+    }
+
     var editModal = new bootstrap.Modal(document.getElementById("editModalNote"), {});
+    $(document).on('click', '.deleteRecord', function() {
 
-    function oepnModal() {
-        $('.editBtn').on('click', function() {
-            editModal.show();
-            $('#id').val($(this).attr('data-id'));
-            $('#title').val($(this).attr('data-title'));
-            $('#description').val($(this).attr('data-description'));
-            var image = $(this).attr('data-image');
-            $('#imagepreview').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
-        });
-    }
+        var id = $(this).attr('data-id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('delete-note') }}",
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                        _token: '{{csrf_token()}}',
+                    },
 
-    function deleteSweetAlert() {
-        $('.deleteRecord').on('click', function() {
+                    beforeSend: function() {},
+                    success: function(res) {
+                        if (res.success == true) {
+                            setTimeout(function() {
+                                Swal.fire('Success!', res.Message, 'success');
+                            }, 1500);
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 2000);
+                        } else {}
+                    },
+                    error: function(e) {}
+                });
+            }
+        })
+    });
 
-            var id = $(this).attr('data-id');
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('delete-note') }}",
-                        dataType: 'json',
-                        data: {
-                            id: id,
-                            _token: '{{csrf_token()}}',
-                        },
-
-                        beforeSend: function() {},
-                        success: function(res) {
-                            if (res.success == true) {
-                                setTimeout(function() {
-                                    Swal.fire('Success!', res.Message, 'success');
-                                }, 1500);
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 2000);
-                            } else {}
-                        },
-                        error: function(e) {}
-                    });
-                }
-            })
-        });
-    }
 
     $('.response_suggestion').on('click', function() {
         $('#response-text').text($(this).attr('data-suggestion'));
@@ -390,6 +426,14 @@
             $(this).prev('.progress-span-label').addClass('text-white');
         }
     });
+
+    function setProgressColor() {
+        $('.progress-bar-record').each(function() {
+            if ($(this).attr('data-width') >= 60) {
+                $(this).prev('.progress-span-label').addClass('text-white');
+            }
+        });
+    }
 
     $("#noteForm").on('submit', function(e) {
         e.preventDefault();
@@ -540,15 +584,12 @@
         reader.readAsDataURL(f);
     })
 
-
-
     $("#range").flatpickr({
         altInput: true,
         altFormat: "F j, Y",
         dateFormat: "Y-m-d",
         mode: "range"
     });
-
 
     $('.deleteRecord').on('click', function() {
 
@@ -589,6 +630,15 @@
         })
     });
 
+    $(document).on('click', '.editBtn', function() {
+        editModal.show();
+        $('#id').val($(this).attr('data-id'));
+        $('#title').val($(this).attr('data-title'));
+        $('#description').val($(this).attr('data-description'));
+        var image = $(this).attr('data-image');
+        $('#imagepreview').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
+
+    })
 
     $("#filterData").on('submit', function(e) {
         $('.loader').removeClass('d-none')
@@ -608,25 +658,28 @@
             },
             success: function(res) {
                 if (res.success == true) {
+                    console.log(res.data);
                     $('.loader').addClass('d-none')
                     $('.note-box').html('');
                     let data = res.data;
                     for (var i = 0; i < data.length; i++) {
+                        let jsonResponse = JSON.parse(data[i].response);
                         $('.note-box').append(`
                             <div class="col-lg-4 mb-3">
                                 <div class="card tasks-box h-100">
                                     <div class="card-body">
                                         <div class="my_note">
                                             <div class="d-flex mb-2">
-                                                <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">${data[i].title}</a></h6>
+                                                <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title">
+                                                    <a href="javascript:void(0)" data-response="${data[i].response}" onclick="showResponse($(this))" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block">${data[i].title}</a>
+                                                    <template class="response">${data[i].response}</template>
+                                                </h6>
                                                 <div class="dropdown">
                                                     <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
                                                         <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                                        <li><a class="dropdown-item editBtn" 
-                                                        onclick=(oepnModal())
-                                                        href="javascript:void(0)" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                                                        <li><a onclick=(deleteSweetAlert()) class="dropdown-item deleteRecord" data-id="${data[i].id}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
+                                                        <li><a class="dropdown-item editBtn" href="javascript:void(0)" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                                                        <li><a class="dropdown-item deleteRecord" data-id="${data[i].id}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -637,14 +690,14 @@
                                         <div class="mb-3">
                                             <div class="d-flex mb-1">
                                                 <div class="flex-grow-1">
-                                                    <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of Neutral</h6>
+                                                    <h6 class="text-muted mb-0"><span class="text-secondary">${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}% </span>of ${ Object.keys(jsonResponse.predictions)[0]}</h6>
                                                 </div>
                                                 <div class="flex-shrink-0">
                                                     <span class="text-muted">{{ $note->created_at->format('Y-M-d') }}</span>
                                                 </div>
                                             </div>
                                             <div class="progress rounded-3 progress-sm">
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar bg-danger" role="progressbar" style="width: ${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -680,7 +733,13 @@
                     </div>`)
                 }
             },
-            error: function(e) {}
+            error: function(e) {
+                $('.loader').addClass('d-none')
+                $('.note-box').append(`
+                    <div class="text-center bg-white">
+                        <img src={{ asset('assets/images/no-data-found.png') }} class="img-fuild" style="height:300px;"></img>
+                    </div>`)
+            }
         });
     });
 </script>

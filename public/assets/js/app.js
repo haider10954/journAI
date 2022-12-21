@@ -1533,8 +1533,7 @@
                     n.classList.add("d-none");
             }),
             document.body.addEventListener("click", function (e) {
-                "search-options" !== e.target.getAttribute("id") &&
-                    (o.classList.remove("show"), n.classList.add("d-none"));
+                
             })),
         (t = document.getElementById("search-close-options")),
         (d = document.getElementById("search-dropdown-reponsive")),
