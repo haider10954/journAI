@@ -16,5 +16,22 @@ class UserNotesController extends Controller
 
     public function delete_notes(Request $request)
     {
+        $notes = Note::where('id', $request->id)->first();
+        $filePath = storage_path('app/public/notes/' . $notes->image);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+        $user_notes = Note::where('id', $request->id)->delete();
+        if ($user_notes) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Note deleted successfully',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong Please try again',
+            ]);
+        }
     }
 }

@@ -59,7 +59,7 @@
                                     <td>
                                         <div class="d-flex gap-1">
                                             <button type="button" class="btn btn-sm btn-secondary"><i class="ri-eye-fill "></i></button>
-                                            <button type="button" class="btn btn-sm btn-danger"><i class="ri-delete-bin-fill "></i></button>
+                                            <a class="btn btn-sm btn-danger deleteRecord" data-id="{{ $n->id }}"><i class="ri-delete-bin-fill "></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -72,4 +72,47 @@
         </div><!-- end card -->
     </div><!-- end col -->
 </div><!-- end row -->
+@endsection
+
+@section('custom-script')
+<script>
+    $('.deleteRecord').on('click', function() {
+
+        var id = $(this).attr('data-id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('delete_notes') }}",
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                        _token: '{{csrf_token()}}',
+                    },
+
+                    beforeSend: function() {},
+                    success: function(res) {
+                        if (res.success == true) {
+                            setTimeout(function() {
+                                Swal.fire('Success!', res.Message, 'success');
+                            }, 1500);
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 3000);
+                        } else {}
+                    },
+                    error: function(e) {}
+                });
+            }
+        })
+    });
+</script>
 @endsection
