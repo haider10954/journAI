@@ -21,13 +21,21 @@ use Illuminate\Support\Facades\Route;
 //Admins routes
 
 Route::prefix('admin')->group(function () {
-    Route::get('/login',[AdminAuthController::class , 'index'])->name('admin-login');
-    Route::post('/login', [AdminAuthController::class , 'admin_login'])->name('admin_login');
-    Route::get('/logout', [AdminAuthController::class , 'admin_logout'])->name('admin_logout');
+    Route::get('/login', [AdminAuthController::class, 'index'])->name('admin-login');
+    Route::post('/login', [AdminAuthController::class, 'admin_login'])->name('admin_login');
+    Route::get('/logout', [AdminAuthController::class, 'admin_logout'])->name('admin_logout');
     Route::middleware('auth:admin')->group(function () {
         Route::get('/', function () {
             return view('admin.index');
         })->name('admin_index');
+
+        //Admin Profile
+        Route::get('/profile', [AdminAuthController::class, 'admin_profile'])->name('admin_profile');
+        Route::get('/update-profile', function () {
+            return view('admin.update_profile');
+        })->name('admin_update_profile_view');
+        Route::post('/update_profile', [AdminAuthController::class, 'update_profile'])->name('admin_update_profile');
+        Route::post('/update_password', [AdminAuthController::class, 'update_password'])->name('admin_update_password');
 
         Route::get('/user-notes', [UserNotesController::class, 'index'])->name('admin_user_notes');
         Route::post('/delete-note', [UserNotesController::class, 'delete_notes'])->name('delete_notes');

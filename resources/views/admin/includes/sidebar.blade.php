@@ -47,7 +47,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarDashboards">
+                            <a class="nav-link menu-link" href="{{ route('admin_profile') }}">
                                 <i class="ri-compasses-2-line"></i> <span>Settings</span>
                             </a>
                         </li>
