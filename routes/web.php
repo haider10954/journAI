@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AuthController as AdminAuthController;
 use App\Http\Controllers\admin\UserNotesController;
 use App\Http\Controllers\user\AuthController;
 use App\Http\Controllers\user\NoteController;
@@ -16,14 +17,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 //Admins routes
 
-Route::get('/admin', function () {
-    return view('admin.index');
-})->name('admin_index');
+Route::prefix('admin')->group(function () {
+    Route::get('/login',[AdminAuthController::class , 'index'])->name('admin-login');
+    Route::post('/login', [AdminAuthController::class , 'admin_login'])->name('admin_login');
+    Route::get('/logout', [AdminAuthController::class , 'admin_logout'])->name('admin_logout');
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('admin_index');
 
-Route::get('/admin/user-notes', [UserNotesController::class, 'index'])->name('admin_user_notes');
-Route::post('/delete-note', [UserNotesController::class, 'delete_notes'])->name('delete_notes');
+        Route::get('/user-notes', [UserNotesController::class, 'index'])->name('admin_user_notes');
+        Route::post('/delete-note', [UserNotesController::class, 'delete_notes'])->name('delete_notes');
+    });
+});
+
+
 
 
 Route::get('/', function () {
@@ -31,10 +42,13 @@ Route::get('/', function () {
 })->name('user_login');
 
 Route::post('/user-login', [AuthController::class, 'user_login'])->name('user-login');
+
 Route::get('/logout', [AuthController::class, 'logout'])->name('user_logout');
+
 Route::get('/user/register', function () {
     return view('user.register');
 })->name('user_register');
+
 Route::post('/user-signup', [AuthController::class, 'user_signUp'])->name('user_signUp');
 
 

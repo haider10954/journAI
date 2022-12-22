@@ -1,15 +1,5 @@
-<!-- @php
-if(!isset($custom_scripts))
-{
-$custom_scripts = [];
-}
-@endphp -->
-
 <!doctype html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
-
-
-<!-- Mirrored from themesbrand.com/velzon/html/default/dashboard-crm.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 13 Sep 2022 07:25:40 GMT -->
 
 <head>
 
