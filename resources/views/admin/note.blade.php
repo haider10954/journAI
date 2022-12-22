@@ -103,10 +103,10 @@
                         if (res.success == true) {
                             setTimeout(function() {
                                 Swal.fire('Success!', res.Message, 'success');
-                            }, 1500);
+                            }, 100);
                             setTimeout(function() {
                                 window.location.reload();
-                            }, 3000);
+                            }, 2000);
                         } else {}
                     },
                     error: function(e) {}
