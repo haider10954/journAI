@@ -44,7 +44,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Company Name</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">AI Analytics</th>
                                     <th scope="col" style="width: 150px;">Action</th>
                                 </tr>
                             </thead>
@@ -55,7 +55,7 @@
                                     <td>{{ $n->getUser->Username }}</td>
                                     <td>{{ $n->getUser->company_name }}</td>
                                     <td>{{ $n->title }}</td>
-                                    <td><span class="badge bg-success">Response</span></td>
+                                    <td><span class="badge bg-success" onclick="openResponse()">Response</span></td>
                                     <td>
                                         <div class="d-flex gap-1">
                                             <button type="button" class="btn btn-sm btn-secondary"><i class="ri-eye-fill "></i></button>
@@ -72,10 +72,42 @@
         </div><!-- end card -->
     </div><!-- end col -->
 </div><!-- end row -->
+
+<!-- Response Modal -->
+<div class="modal fade zoomIn" id="aiModal" tabindex="-1" aria-labelledby="aiModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AI Analytics</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="mb-3 fw-semibold text-uppercase">Prediction</h6>
+                <div class="row">
+                    <div class="col-lg-12 predictions">
+                    </div>
+                </div>
+
+                <h6 class="mb-3 fw-semibold text-uppercase">Harassment Predictions</h6>
+                <div class="row">
+                    <div class="col-lg-12 harassment_predictions">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Response Modal -->
 @endsection
 
 @section('custom-script')
 <script>
+    var aiModal = new bootstrap.Modal(document.getElementById("aiModal"), {});
+
+    function openResponse() {
+        aiModal.show();
+    }
+
     $('.deleteRecord').on('click', function() {
 
         var id = $(this).attr('data-id');
