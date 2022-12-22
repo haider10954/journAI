@@ -173,12 +173,14 @@
                     $('.prompt').html('<div class="alert alert-success">' + res.message + '</div>');
                     setTimeout(function() {
                         $('.prompt').hide()
+                        window.location.reload();
                     }, 3000);
                     $('.prompt').show()
                 } else {
                     $('.prompt').html('<div class="alert alert-danger">' + res.message + '</div>');
                     setTimeout(function() {
                         $('.prompt').hide()
+                        window.location.reload();
                     }, 3000);
 
                     $('.prompt').show()
