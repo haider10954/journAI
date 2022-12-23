@@ -47,3 +47,7 @@
     width: 50px;
     border-radius: 3px;
 }
+
+.no_records {
+    height: 300px;
+}

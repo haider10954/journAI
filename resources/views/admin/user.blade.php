@@ -22,11 +22,6 @@
 </div>
 <!-- end page title -->
 <div class="row">
-    @foreach($notes as $note)
-    @php
-    $response = json_decode($note->response);
-    @endphp
-    @endforeach
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
@@ -47,31 +42,27 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Full Name</th>
+                                    <th scope="col">Job</th>
                                     <th scope="col">Company Name</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">AI Analytics</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="myTable">
-                                @if($notes->count() > 0)
-                                @foreach ($notes as $n)
+                                @if($user->count() > 0)
+                                @foreach ($user as $u)
                                 <tr>
                                     <td><a href="#" class="fw-medium">{{ $loop->index+1 }}</a></td>
-                                    <td>{{ $n->getUser->Username }}</td>
-                                    <td>{{ $n->getUser->company_name }}</td>
-                                    <td>{{ $n->title }}</td>
-                                    <td>
-                                        <div>
-                                            <img src="{{ $n->getImage() }}" class="img-fluid note_img">
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-success note-title" onclick="openResponse()" data-response="{{ $n->response }}">Response</span></td>
+                                    <td>{{ $u->Username }}</td>
+                                    <td>{{ $u->email }}</td>
+                                    <td>{{ $u->fullname }}</td>
+                                    <td>{{ $u->Job_designation }}</td>
+                                    <td>{{ $u->company_name }}</td>
                                     <td>
                                         <div class="d-flex gap-1">
                                             <button type="button" class="btn btn-sm btn-secondary"><i class="ri-eye-fill "></i></button>
-                                            <a class="btn btn-sm btn-danger deleteRecord" data-id="{{ $n->id }}"><i class="ri-delete-bin-fill "></i></a>
+                                            <a class="btn btn-sm btn-danger deleteRecord" data-id="{{ $u->id }}"><i class="ri-delete-bin-fill "></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -88,7 +79,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-end mt-3">
-                            {{ $notes->links('vendor.pagination.bootstrap-4') }}
+                            {{ $user->links('vendor.pagination.bootstrap-4') }}
                         </div>
                     </div>
                 </div>
@@ -97,82 +88,11 @@
     </div><!-- end col -->
 </div><!-- end row -->
 
-<!-- Response Modal -->
-<div class="modal fade zoomIn" id="aiModal" tabindex="-1" aria-labelledby="aiModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">AI Analytics</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h6 class="mb-3 fw-semibold text-uppercase">Prediction</h6>
-                <div class="row">
-                    <div class="col-lg-12 predictions">
-                    </div>
-                </div>
-
-                <h6 class="mb-3 fw-semibold text-uppercase">Harassment Predictions</h6>
-                <div class="row">
-                    <div class="col-lg-12 harassment_predictions">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Response Modal -->
 @endsection
 
 @section('custom-script')
+
 <script>
-    $('.note-title').on('click', function() {
-        let response = JSON.parse($(this).attr('data-response'));
-        console.log(response);
-        $('.predictions').html('');
-        for (const key in response.predictions) {
-
-            $('.predictions').append(`
-                <div class="mb-3">
-                    <!-- Labels Example -->
-                    <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
-                        <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.predictions[key]*100).toFixed(1)}%</span>
-                        <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            `)
-            console.log(`${key}: ${response.predictions[key]}`);
-        }
-        $('.harassment_predictions').html('');
-        for (const key in response.harassment_predictions) {
-            $('.harassment_predictions').append(`
-                    <div class="mb-3">
-                        <!-- Labels Example -->
-                        <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
-                            <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.harassment_predictions[key]*100).toFixed(1)}%</span>
-                            <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.harassment_predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.harassment_predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                `)
-            console.log(`${key}: ${response.harassment_predictions[key]}`);
-        }
-        setProgressColor();
-    });
-
-    function setProgressColor() {
-        $('.progress-bar-record').each(function() {
-            if ($(this).attr('data-width') >= 60) {
-                $(this).prev('.progress-span-label').addClass('text-white');
-            }
-        });
-    }
-
-    var aiModal = new bootstrap.Modal(document.getElementById("aiModal"), {});
-
-    function openResponse() {
-        aiModal.show();
-    }
-
     $('.deleteRecord').on('click', function() {
 
         var id = $(this).attr('data-id');
@@ -188,7 +108,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "POST",
-                    url: "{{ route('delete_notes') }}",
+                    url: "{{ route('delete_user') }}",
                     dataType: 'json',
                     data: {
                         id: id,
@@ -211,7 +131,6 @@
             }
         })
     });
-
 
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
@@ -242,4 +161,5 @@
         }
     }
 </script>
+
 @endsection

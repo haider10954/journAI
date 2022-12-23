@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AuthController as AdminAuthController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\UserNotesController;
 use App\Http\Controllers\user\AuthController;
 use App\Http\Controllers\user\NoteController;
@@ -25,6 +26,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminAuthController::class, 'admin_login'])->name('admin_login');
     Route::get('/logout', [AdminAuthController::class, 'admin_logout'])->name('admin_logout');
     Route::middleware('auth:admin')->group(function () {
+
+        //Admin Index
         Route::get('/', function () {
             return view('admin.index');
         })->name('admin_index');
@@ -37,8 +40,13 @@ Route::prefix('admin')->group(function () {
         Route::post('/update_profile', [AdminAuthController::class, 'update_profile'])->name('admin_update_profile');
         Route::post('/update_password', [AdminAuthController::class, 'update_password'])->name('admin_update_password');
 
+        //Admin User Notes
         Route::get('/user-notes', [UserNotesController::class, 'index'])->name('admin_user_notes');
         Route::post('/delete-note', [UserNotesController::class, 'delete_notes'])->name('delete_notes');
+
+        //Admin User
+        Route::get('/user', [UserController::class, 'user_listing'])->name('admin_user');
+        Route::post('/delete-user', [UserController::class, 'delete_user'])->name('delete_user');
     });
 });
 

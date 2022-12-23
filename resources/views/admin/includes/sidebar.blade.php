@@ -42,7 +42,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#sidebarDashboards">
+                            <a class="nav-link menu-link @if(\Request::route()->getName() == 'admin_user') active @endif" href="{{ route('admin_user') }}">
                                 <i class="ri-apps-2-line"></i> <span>Users</span>
                             </a>
                         </li>
