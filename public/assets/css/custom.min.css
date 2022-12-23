@@ -41,3 +41,9 @@
     color: black;
     font-weight: bold;
 }
+
+.note_img {
+    height: 50px;
+    width: 50px;
+    border-radius: 3px;
+}

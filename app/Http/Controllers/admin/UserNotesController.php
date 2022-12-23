@@ -10,7 +10,7 @@ class UserNotesController extends Controller
 {
     public function index()
     {
-        $notes = Note::get();
+        $notes = Note::paginate(1);
         return view('admin.note', compact('notes'));
     }
 

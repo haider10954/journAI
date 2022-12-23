@@ -14,4 +14,9 @@ class Note extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function getImage()
+    {
+        return asset('storage/notes/' . $this->image);
+    }
 }

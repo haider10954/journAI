@@ -22,6 +22,11 @@
 </div>
 <!-- end page title -->
 <div class="row">
+    @foreach($notes as $note)
+    @php
+    $response = json_decode($note->response);
+    @endphp
+    @endforeach
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header align-items-center d-flex">
@@ -29,7 +34,7 @@
 
                 <div class="flex-shrink-0">
                     <div class="form-check form-switch form-switch-right form-switch-md">
-                        <input class="form-control" placeholder="Search Here" type="text">
+                        <input class="form-control" placeholder="Search by name" type="text" id="myInput" onkeyup="myFunction()">
                     </div>
                 </div>
             </div><!-- end card header -->
@@ -44,18 +49,24 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Company Name</th>
                                     <th scope="col">Title</th>
+                                    <th scope="col">Image</th>
                                     <th scope="col">AI Analytics</th>
                                     <th scope="col" style="width: 150px;">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="myTable">
                                 @foreach ($notes as $n)
                                 <tr>
                                     <td><a href="#" class="fw-medium">{{ $loop->index+1 }}</a></td>
                                     <td>{{ $n->getUser->Username }}</td>
                                     <td>{{ $n->getUser->company_name }}</td>
                                     <td>{{ $n->title }}</td>
-                                    <td><span class="badge bg-success" onclick="openResponse()">Response</span></td>
+                                    <td>
+                                        <div>
+                                            <img src="{{ $n->getImage() }}" class="img-fluid note_img">
+                                        </div>
+                                    </td>
+                                    <td><span class="badge bg-success note-title" onclick="openResponse()" data-response="{{ $n->response }}">Response</span></td>
                                     <td>
                                         <div class="d-flex gap-1">
                                             <button type="button" class="btn btn-sm btn-secondary"><i class="ri-eye-fill "></i></button>
@@ -66,6 +77,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="d-flex justify-content-end mt-3">
+                            {{ $notes->links('vendor.pagination.bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div><!-- end card-body -->
@@ -102,6 +116,47 @@
 
 @section('custom-script')
 <script>
+    $('.note-title').on('click', function() {
+        let response = JSON.parse($(this).attr('data-response'));
+        console.log(response);
+        $('.predictions').html('');
+        for (const key in response.predictions) {
+
+            $('.predictions').append(`
+                <div class="mb-3">
+                    <!-- Labels Example -->
+                    <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                        <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.predictions[key]*100).toFixed(1)}%</span>
+                        <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            `)
+            console.log(`${key}: ${response.predictions[key]}`);
+        }
+        $('.harassment_predictions').html('');
+        for (const key in response.harassment_predictions) {
+            $('.harassment_predictions').append(`
+                    <div class="mb-3">
+                        <!-- Labels Example -->
+                        <div class="progress progress_bar position-relative" style="background-color: #d5e0f1;">
+                            <span class="progress-span-label" style="position: absolute;top:0;height:100%;line-height:19px;width:100%;text-align:center;color: #000000;">${key} ${(response.harassment_predictions[key]*100).toFixed(1)}%</span>
+                            <div class="progress-bar progress_bar_inner progress-bar-record" role="progressbar" style="width: ${(response.harassment_predictions[key]*100).toFixed(1)}%;" aria-valuenow="25" data-width="${(response.harassment_predictions[key]*100).toFixed(1)}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                `)
+            console.log(`${key}: ${response.harassment_predictions[key]}`);
+        }
+        setProgressColor();
+    });
+
+    function setProgressColor() {
+        $('.progress-bar-record').each(function() {
+            if ($(this).attr('data-width') >= 60) {
+                $(this).prev('.progress-span-label').addClass('text-white');
+            }
+        });
+    }
+
     var aiModal = new bootstrap.Modal(document.getElementById("aiModal"), {});
 
     function openResponse() {
@@ -146,5 +201,35 @@
             }
         })
     });
+
+
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        let hiddenCount = 0;
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                    hiddenCount++;
+                }
+            }
+        }
+        if (hiddenCount === $('#myTable tr').length) {
+            $('#myTable').append(`
+                  <tr id="no_record">
+                    <td colspan="7" class="text-center">No records found</td>
+                  </tr>`);
+        } else {
+            $(document).find('#no_record').remove();
+        }
+    }
 </script>
 @endsection
