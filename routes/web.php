@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Admins routes
-
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'index'])->name('admin-login');
     Route::post('/login', [AdminAuthController::class, 'admin_login'])->name('admin_login');

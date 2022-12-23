@@ -127,7 +127,7 @@
                                         </div>
 
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Already have an account ? <a class="fw-semibold text-primary text-decoration-underline" href="{{ route('login') }}"> Signin</a> </p>
+                                            <p class="mb-0">Already have an account ? <a class="fw-semibold text-primary text-decoration-underline" href="{{ route('user_login') }}"> Signin</a> </p>
                                         </div>
                                     </div>
                                 </div>
