@@ -35,7 +35,7 @@
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
                                 <a href="javascript:void(0)" class="d-inline-block auth-logo">
-                                    <img src="{{asset('assets/images/logo-white.png')}}" alt="" height="20">
+                                    <img src="{{asset('assets/images/logo-white.png')}}" alt="" height="70">
                                 </a>
                             </div>
                         </div>
