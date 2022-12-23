@@ -47,6 +47,8 @@ Route::prefix('admin')->group(function () {
         //Admin User
         Route::get('/user', [UserController::class, 'user_listing'])->name('admin_user');
         Route::post('/delete-user', [UserController::class, 'delete_user'])->name('delete_user');
+        Route::get('/user/edit/{id}', [UserController::class, 'update_user'])->name('update_user');
+        Route::post('/edit-user', [UserController::class, 'update_profile'])->name('admin_edit_user');
     });
 });
 

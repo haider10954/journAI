@@ -18,5 +18,8 @@
     <!-- Dashboard init -->
     <script src="{{asset('assets/js/pages/dashboard-crm.init.js')}}"></script>
 
+    <!-- Tagify -->
+    <script src="{{ asset('assets/js/jQuery.tagify.min.js') }}"></script>
+
     <!-- App js -->
     <script src="{{asset('assets/js/app.js')}}"></script>

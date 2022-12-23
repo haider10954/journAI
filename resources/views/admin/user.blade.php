@@ -61,7 +61,7 @@
                                     <td>{{ $u->company_name }}</td>
                                     <td>
                                         <div class="d-flex gap-1">
-                                            <button type="button" class="btn btn-sm btn-secondary"><i class="ri-eye-fill "></i></button>
+                                            <a class="btn btn-sm btn-secondary" href="{{ route('update_user' , $u->id ) }}"><i class="ri-edit-fill "></i></a>
                                             <a class="btn btn-sm btn-danger deleteRecord" data-id="{{ $u->id }}"><i class="ri-delete-bin-fill "></i></a>
                                         </div>
                                     </td>
