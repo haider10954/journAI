@@ -32,12 +32,12 @@
                     </div>
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('admin_index') }}">
+                            <a class="nav-link menu-link @if(\Request::route()->getName() == 'admin_index') active @endif" href="{{ route('admin_index') }}">
                                 <i class="ri-dashboard-2-line"></i> <span>Dashboards</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{route('admin_user_notes') }}">
+                            <a class="nav-link menu-link @if(\Request::route()->getName() == 'admin_user_notes') active @endif" href="{{route('admin_user_notes') }}">
                                 <i class="ri-account-circle-line"></i> <span>Users Notes</span>
                             </a>
                         </li>
@@ -47,7 +47,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('admin_profile') }}">
+                            <a class="nav-link menu-link @if(\Request::route()->getName() == 'admin_profile') active @endif" href="{{ route('admin_profile') }}">
                                 <i class="ri-compasses-2-line"></i> <span>Settings</span>
                             </a>
                         </li>
