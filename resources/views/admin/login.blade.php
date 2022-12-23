@@ -6,8 +6,9 @@
     <meta charset="utf-8" />
     <title>JournAI | Admin Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
 
     @include('admin.includes.style')
 
@@ -33,8 +34,8 @@
                     <div class="col-lg-12">
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
-                                <a href="index.html" class="d-inline-block auth-logo">
-                                    <img src="{{asset('assets/images/logo-light.png')}}" alt="" height="20">
+                                <a href="javascript:void(0)" class="d-inline-block auth-logo">
+                                    <img src="{{asset('assets/images/logo-white.png')}}" alt="" height="20">
                                 </a>
                             </div>
                         </div>
