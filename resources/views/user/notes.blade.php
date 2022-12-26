@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0">Hi {{ auth()->user()->Username }}</h4>
+            <h4 class="mb-sm-0 c">Hi {{ auth()->user()->Username }}</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
@@ -91,9 +91,9 @@
             <div class="card-body">
                 <div class="my_note">
                     <div class="d-flex mb-2">
-                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ Str::limit($note->title, 30) }}</a></h6>
+                        <h6 class="fs-15 mb-0 flex-grow-1  task-title">{{ $note->title }}</h6>
                     </div>
-                    <p class="text-muted">{{ $note->description }}.</p>
+                    <p class="text-muted description"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->description }}.</a></p>
                 </div>
             </div>
             <div class="card-footer">
@@ -110,17 +110,7 @@
                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1">
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                <li><a class="dropdown-item editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                                <li><a class="dropdown-item deleteRecord" data-id="{{ $note->id }}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="d-flex align-items-center justify-content-between">
                     <div class="flex-shrink-0">
                         <div class="avatar-group">
                             @if(!empty(auth()->user()->photo))
@@ -134,6 +124,10 @@
                             @endif
 
                         </div>
+                    </div>
+                    <div class="dropdown">
+                        <a class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line"></i></a>
+                        <a class="btn btn-sm btn-danger  deleteRecord" data-id="{{ $note->id }}"><i class="ri-delete-bin-5-line"></i></a>
                     </div>
                 </div>
             </div>
@@ -669,7 +663,7 @@
                                     <div class="card-body">
                                         <div class="my_note">
                                             <div class="d-flex mb-2">
-                                                <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title">
+                                                <h6 class="fs-15 mb-0 flex-grow-1  task-title">
                                                     <a href="javascript:void(0)" data-response="${data[i].response}" onclick="showResponse($(this))" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block">${data[i].title}</a>
                                                     <template class="response">${data[i].response}</template>
                                                 </h6>
