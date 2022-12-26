@@ -88,3 +88,7 @@
     scrollbar-color: #d8d8d8 #fafafa;
     scrollbar-width: thin;
 }
+
+.text-justify {
+    text-align: justify;
+}

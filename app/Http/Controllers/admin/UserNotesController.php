@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class UserNotesController extends Controller
 {
-    public function index()
+    public function index($id = "")
     {
-        $notes = Note::latest()->paginate(6);
+        if (empty($id)) {
+
+            $notes = Note::latest()->paginate(6);
+        } else {
+            $notes = Note::where('user_id', $id)->paginate(6);
+        }
         return view('admin.note', compact('notes'));
     }
 

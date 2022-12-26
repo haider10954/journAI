@@ -46,6 +46,7 @@
                                     <th scope="col">Full Name</th>
                                     <th scope="col">Job</th>
                                     <th scope="col">Company Name</th>
+                                    <th scope="col">Notes</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -59,6 +60,7 @@
                                     <td>{{ $u->fullname }}</td>
                                     <td>{{ $u->Job_designation }}</td>
                                     <td>{{ $u->company_name }}</td>
+                                    <td><a class="badge bg-success" href="{{ route('admin_user_notes' , $u->id ) }}">User Notes</a></td>
                                     <td>
                                         <div class="d-flex gap-1">
                                             <a class="btn btn-sm btn-secondary" href="{{ route('update_user' , $u->id ) }}"><i class="ri-edit-fill "></i></a>

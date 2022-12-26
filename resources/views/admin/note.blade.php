@@ -70,7 +70,7 @@
                                     <td><span class="badge bg-success note-title" onclick="openResponse()" data-response="{{ $n->response }}">Response</span></td>
                                     <td>
                                         <div class="d-flex gap-1">
-                                            <button type="button" class="btn btn-sm btn-secondary"><i class="ri-eye-fill "></i></button>
+                                            <a type="button" class="btn btn-sm btn-secondary viewPost" data-bs-toggle="modal" href="#viewPost" data-title="{{ $n->title }}" data-description="{{ $n->description }}" data-img="{{ $n->image }}"><i class="ri-eye-fill "></i></a>
                                             <a class="btn btn-sm btn-danger deleteRecord" data-id="{{ $n->id }}"><i class="ri-delete-bin-fill "></i></a>
                                         </div>
                                     </td>
@@ -118,10 +118,62 @@
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-end justify-content-end">
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Suggestion</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <!-- End Response Modal -->
+
+
+<div class="modal fade zoomIn" id="suggestionModal" tabindex="-1" aria-labelledby="suggestionModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">AI Suggestion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="response-text"></p>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-end justify-content-end">
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Suggestion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade zoomIn" id="viewPost" tabindex="-1" aria-labelledby="viewPost" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noteTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text text-muted text-justify" id="description"></p>
+                    </div>
+                    <div class="noteImg"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex align-items-end justify-content-end">
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Suggestion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 @endsection
 
 @section('custom-script')
@@ -212,6 +264,23 @@
         })
     });
 
+    $('.response_suggestion').on('click', function() {
+        $('#response-text').text($(this).attr('data-suggestion'));
+    });
+
+    $('.viewPost').on('click', function() {
+        $('#description').text($(this).attr('data-description'));
+        $('#noteTitle').text($(this).attr('data-title'));
+        let image = $(this).attr('data-img');
+        if ($(this).attr('data-img') == null) {
+            $('.noteImg').html('')
+            $('.noteImg').append(`
+                <img class="card-img-bottom img-fluid" src="{{ asset('assets/images/small/img-11.jpg') }}" alt="Card image">
+            `)
+        } else {
+            $('.noteImg').append(`<img class="card-img-bottom img-fluid" src="{{ asset("storage/notes/") }}/${image}" alt="Card image cap">`);
+        }
+    });
 
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;

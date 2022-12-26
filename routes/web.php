@@ -40,7 +40,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/update_password', [AdminAuthController::class, 'update_password'])->name('admin_update_password');
 
         //Admin User Notes
-        Route::get('/user-notes', [UserNotesController::class, 'index'])->name('admin_user_notes');
+        Route::get('/user-notes/{id?}', [UserNotesController::class, 'index'])->name('admin_user_notes');
         Route::post('/delete-note', [UserNotesController::class, 'delete_notes'])->name('delete_notes');
 
         //Admin User
