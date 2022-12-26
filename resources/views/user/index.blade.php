@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0">Journ AI</h4>
+            <h4 class="mb-sm-0">Hi {{ auth()->user()->Username }}</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
@@ -28,8 +28,7 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <p class="fw-medium text-muted mb-0">Total Notes</p>
-                        <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value" data-target="234">0</span>k</h2>
-                        <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0"> <i class="ri-arrow-up-line align-middle"></i> 17.32 %</span> vs. previous month</p>
+                        <h2 class="mt-4 ff-secondary fw-semibold"><span class="counter-value" data-target="{{ $user_notes }}">{{ $user_notes }}</span></h2>
                     </div>
                     <div>
                         <div class="avatar-sm flex-shrink-0">

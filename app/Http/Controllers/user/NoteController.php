@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
+    public function user_index()
+    {
+        $user_notes = Note::where('user_id', auth()->id())->count();
+        return view('user.index', compact('user_notes'));
+    }
     public function notes_listing()
     {
 

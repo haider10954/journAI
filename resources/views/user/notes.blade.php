@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0">Journ AI</h4>
+            <h4 class="mb-sm-0">Hi {{ auth()->user()->Username }}</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
@@ -91,15 +91,7 @@
             <div class="card-body">
                 <div class="my_note">
                     <div class="d-flex mb-2">
-                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->title}}</a></h6>
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                <li><a class="dropdown-item editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                                <li><a class="dropdown-item deleteRecord" data-id="{{ $note->id }}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                            </ul>
-                        </div>
+                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ Str::limit($note->title, 40) }}</a></h6>
                     </div>
                     <p class="text-muted">{{ $note->description }}.</p>
                 </div>
@@ -120,7 +112,14 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="flex-grow-1">
-                        <span class="badge badge-soft-primary">{{ auth()->user()->fullname }}</span>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
+                                <li><a class="dropdown-item editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                                <li><a class="dropdown-item deleteRecord" data-id="{{ $note->id }}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="flex-shrink-0">
                         <div class="avatar-group">

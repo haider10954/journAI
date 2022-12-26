@@ -99,7 +99,7 @@
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="hstack gap-2 justify-content-end">
-                                        <button type="submit" id="submitForm" class="btn btn-primary">Updates</button>
+                                        <button type="submit" id="submitForm" class="btn btn-primary">Update</button>
                                         <button type="button" class="btn btn-soft-success">Cancel</button>
                                     </div>
                                 </div>

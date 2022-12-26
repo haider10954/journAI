@@ -69,6 +69,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
+                                                    <th class="ps-0" scope="row">Company</th>
+                                                    <td class="text-muted">{{ auth()->user()->company_name }}</td>
+                                                </tr>
+                                                <tr>
                                                     <th class="ps-0" scope="row">Job Designation</th>
                                                     <td class="text-muted">{{ auth()->user()->Job_designation }}</td>
                                                 </tr>

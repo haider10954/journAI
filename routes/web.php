@@ -70,9 +70,7 @@ Route::post('/user-signup', [AuthController::class, 'user_signUp'])->name('user_
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/index', function () {
-        return view('user.index');
-    })->name('index');
+    Route::get('/index', [NoteController::class, 'user_index'])->name('index');
 
     //Notes
     Route::get('/notes', [NoteController::class, 'notes_listing'])->name('notes');
