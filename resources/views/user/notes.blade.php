@@ -91,7 +91,7 @@
             <div class="card-body">
                 <div class="my_note">
                     <div class="d-flex mb-2">
-                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ Str::limit($note->title, 40) }}</a></h6>
+                        <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ Str::limit($note->title, 30) }}</a></h6>
                     </div>
                     <p class="text-muted">{{ $note->description }}.</p>
                 </div>
