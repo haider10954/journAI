@@ -141,7 +141,7 @@
             </div>
             <div class="modal-footer">
                 <div class="d-flex align-items-end justify-content-end">
-                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Suggestion</button>
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Close</button>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
             </div>
             <div class="modal-footer">
                 <div class="d-flex align-items-end justify-content-end">
-                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Close</button>
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Suggestion</button>
                 </div>
             </div>
         </div>
