@@ -272,7 +272,7 @@
         $('#description').text($(this).attr('data-description'));
         $('#noteTitle').text($(this).attr('data-title'));
         let image = $(this).attr('data-img');
-        if ($(this).attr('data-img') == null) {
+        if ($(this).attr('data-img') == "") {
             $('.noteImg').html('')
             $('.noteImg').append(`
                 <img class="card-img-bottom img-fluid" src="{{ asset('assets/images/small/img-11.jpg') }}" alt="Card image">
