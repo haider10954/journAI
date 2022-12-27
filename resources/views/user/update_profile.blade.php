@@ -17,7 +17,11 @@
                 <div class="prompt mt-3 mb-3"></div>
                 <div class="text-center">
                     <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
+                        @if(auth()->user()->image == null)
+                        <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-img" class="rounded-circle avatar-xl img-thumbnail user-profile-image" />
+                        @else
                         <img src="{{asset( ''.auth()->user()->userImage())}}" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">
+                        @endif
                     </div>
                     <h5 class="fs-16 mb-1">{{ auth()->user()->Username }}</h5>
                     <p class="text-muted mb-0">{{ auth()->user()->Job_designation }}</p>

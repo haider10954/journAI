@@ -329,7 +329,7 @@
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            @if(auth()->user()->userImage() == "")
+                            @if(auth()->user()->image == null )
                             <img class="rounded-circle header-profile-user" src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="Header Avatar">
                             @else
                             <img class="rounded-circle header-profile-user" src="{{asset( ''.auth()->user()->userImage())}}" alt="Header Avatar">
