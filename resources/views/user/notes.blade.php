@@ -93,7 +93,7 @@
                     <div class="d-flex mb-2">
                         <h6 class="fs-15 mb-0 flex-grow-1  task-title">{{ $note->title }}</h6>
                     </div>
-                    <p class="text-muted text-justify description"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->description }}.</a></p>
+                    <p class="text-muted text-justify description mb-0"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->description }}.</a></p>
                 </div>
             </div>
             <div class="card-footer">
