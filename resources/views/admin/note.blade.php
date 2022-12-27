@@ -276,8 +276,9 @@
             $('.noteImg').html('')
             $('.noteImg').append(`
                 <img class="card-img-bottom img-fluid" src="{{ asset('assets/images/small/img-11.jpg') }}" alt="Card image">
-            `)
+            `);
         } else {
+            $('.noteImg').html('')
             $('.noteImg').append(`<img class="card-img-bottom img-fluid" src="{{ asset("storage/notes/") }}/${image}" alt="Card image cap">`);
         }
     });
