@@ -17,9 +17,7 @@ class NoteController extends Controller
     }
     public function notes_listing()
     {
-
         $notes = Note::where('user_id', auth()->id())->get();
-
         return view('user.notes', compact('notes'));
     }
     function upload_files($file)

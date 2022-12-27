@@ -53,9 +53,11 @@
 <!--end card-->
 
 <div class="row mb-3 note-box">
+    <input type="hidden" name="checkNote" id="checkNote" value="{{$notes}}">
+    @if($notes->count() > 0)
     @foreach($notes as $note)
     @php
-    $response = json_decode($note->response);
+    $response=json_decode($note->response);
     $count = 0 ;
     $first_value = '' ;
 
@@ -69,8 +71,6 @@
     $count++;
     break;
     }
-
-
 
 
     $first_width = round($first_value * 100, 1);
@@ -93,7 +93,7 @@
                     <div class="d-flex mb-2">
                         <h6 class="fs-15 mb-0 flex-grow-1  task-title">{{ $note->title }}</h6>
                     </div>
-                    <p class="text-muted text-justify description mb-0"><a href="javascript:void(0)" data-response="{{ $note->response }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->description }}.</a></p>
+                    <p class="text-muted text-justify description mb-0"><a href="javascript:void(0)" data-response="{{ $note->response ?? '' }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->description }}.</a></p>
                 </div>
             </div>
             <div class="card-footer">
@@ -134,6 +134,11 @@
         </div>
     </div>
     @endforeach
+    @else
+    <div class="text-center">
+        <img src="{{ asset('assets/images/no-data-found.png') }}" alt="img" class="img-fluid no_records">
+    </div>
+    @endif
     <!-- Notes Dynamic -->
 </div>
 
@@ -160,7 +165,7 @@
             </div>
             <div class="modal-footer">
                 <div class="d-flex align-items-end justify-content-end">
-                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions }}" href="#suggestionModal">Suggestion</button>
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Suggestion</button>
                 </div>
             </div>
         </div>
@@ -179,7 +184,7 @@
             </div>
             <div class="modal-footer">
                 <div class="d-flex align-items-end justify-content-end">
-                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions }}" href="#suggestionModal">Suggestion</button>
+                    <button class="btn btn-sm btn-info response_suggestion" data-bs-toggle="modal" data-suggestion="{{ $response->suggestions ?? '' }}" href="#suggestionModal">Suggestion</button>
                 </div>
             </div>
         </div>
@@ -686,7 +691,7 @@
                                                     <h6 class="text-muted mb-0"><span class="text-secondary">${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}% </span>of ${ Object.keys(jsonResponse.predictions)[0]}</h6>
                                                 </div>
                                                 <div class="flex-shrink-0">
-                                                    <span class="text-muted">{{ $note->created_at->format('Y-M-d') }}</span>
+                                                    <span class="text-muted"></span>
                                                 </div>
                                             </div>
                                             <div class="progress rounded-3 progress-sm">
