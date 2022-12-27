@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Note;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -116,5 +118,12 @@ class AuthController extends Controller
                 'message' => 'Something went wrong Please try again'
             ]);
         }
+    }
+
+    public function index_page()
+    {
+        $user = User::get()->count();
+        $notes = Note::get()->count();
+        return view('admin.index', compact('user', 'notes'));
     }
 }

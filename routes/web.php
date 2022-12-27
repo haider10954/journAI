@@ -27,9 +27,7 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth:admin')->group(function () {
 
         //Admin Index
-        Route::get('/', function () {
-            return view('admin.index');
-        })->name('admin_index');
+        Route::get('/', [AdminAuthController::class, 'index_page'])->name('admin_index');
 
         //Admin Profile
         Route::get('/profile', [AdminAuthController::class, 'admin_profile'])->name('admin_profile');

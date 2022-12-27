@@ -67,7 +67,7 @@
                                             <img src="{{ $n->getImage() }}" class="img-fluid note_img">
                                         </div>
                                     </td>
-                                    <td><span class="badge bg-success note-title" onclick="openResponse()" data-response="{{ $n->response }}">Response</span></td>
+                                    <td><span class="badge bg-success note-title" onclick="openResponse()" data-response="{{ $n->response }}">Predictions</span></td>
                                     <td>
                                         <div class="d-flex gap-1">
                                             <a type="button" class="btn btn-sm btn-secondary viewPost" data-bs-toggle="modal" href="#viewPost" data-title="{{ $n->title }}" data-description="{{ $n->description }}" data-img="{{ $n->image }}"><i class="ri-eye-fill "></i></a>
