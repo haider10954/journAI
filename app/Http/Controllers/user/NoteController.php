@@ -22,10 +22,14 @@ class NoteController extends Controller
     }
     function upload_files($file)
     {
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/notes/', $fileName);
-        $loadPath = storage_path('app/public/') . '/' . $fileName;
-        return $fileName;
+        if (!empty($file)) {
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/notes/', $fileName);
+            $loadPath = storage_path('app/public/') . '/' . $fileName;
+            return $fileName;
+        } else {
+            $fileName = '';
+        }
     }
 
     public function add_note(Request $request)
@@ -35,22 +39,22 @@ class NoteController extends Controller
             'description' => 'required',
             'file' => 'mimes:jpg,jpeg,png'
         ]);
-
-        $file = $this->upload_files($request['file']);
-
         $response = Http::asForm()->post('http://3.140.248.219:8000/predict_api', [
             'text' => $request['title'],
         ]);
         $getData = $response->collect()->toArray();
-
-        $note = Note::create([
+        $data = [
             'user_id' => auth()->id(),
             'title' => $request['title'],
             'response' => json_encode($getData),
             'analytics' => json_encode($getData['predictions']),
             'description' => $request['description'],
-            'image' => $file,
-        ]);
+        ];
+        $file = $this->upload_files($request['file']);
+        if (!empty($file)) {
+            $data['image'] = $file;
+        }
+        $note = Note::create($data);
 
         if ($note) {
             return json_encode([

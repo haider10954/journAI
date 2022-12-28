@@ -454,11 +454,10 @@
                 $("#submitForm").attr('class', 'btn btn-success');
                 if (res.success) {
                     $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
-                    setTimeout(function() {
-                        $('html, body').animate({
-                            scrollTop: $("html, body").offset().top
-                        }, 1000);
-                    }, 1500);
+
+                    $('#createboardModal').modal().animate({
+                        scrollTop: 0
+                    }, 300);
 
                     setTimeout(function() {
                         $('.prompt').hide()
@@ -469,11 +468,11 @@
 
                 } else {
                     $('.prompt').html('<div class="alert alert-danger mb-3">' + res.message + '</div>');
-                    setTimeout(function() {
-                        $('html, body').animate({
-                            scrollTop: $("html, body").offset().top
-                        }, 1000);
-                    }, 1500);
+
+                    $('#createboardModal').modal().animate({
+                        scrollTop: 0
+                    }, 300);
+
 
                     setTimeout(function() {
                         $('.prompt').hide()
@@ -520,6 +519,11 @@
                 if (res.success) {
                     $('.prompt').html('<div class="alert alert-success mb-3">' + res.message + '</div>');
 
+
+                    $('#editModalNote').modal().animate({
+                        scrollTop: 0
+                    }, '300');
+
                     setTimeout(function() {
                         $('.prompt').hide()
                     }, 3000);
@@ -529,11 +533,11 @@
 
                 } else {
                     $('.prompt').html('<div class="alert alert-danger mb-3">' + res.message + '</div>');
-                    setTimeout(function() {
-                        $('html, body').animate({
-                            scrollTop: $("html, body").offset().top
-                        }, 1000);
-                    }, 1500);
+
+                    $('#editModalNote').modal().animate({
+                        scrollTop: 0
+                    }, '300');
+
 
                     setTimeout(function() {
                         $('.prompt').hide()
