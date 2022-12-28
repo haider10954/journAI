@@ -206,19 +206,19 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <label for="boardName" class="form-label">Note Title</label>
-                            <input type="text" class="form-control" placeholder="Enter Note title" name="title">
+                            <input type="text" class="form-control" placeholder="Enter Note title" name="title" autocomplete="off">
                             <div class="error-title"></div>
                         </div>
 
                         <div class="col-lg-12">
                             <label for="boardName" class="form-label">Note Description</label>
-                            <textarea class="form-control" placeholder="Enter description" name="description" rows="5" style="resize: none;"></textarea>
+                            <textarea class="form-control" placeholder="Enter description" name="description" rows="5" style="resize: none;" autocomplete="off"></textarea>
                             <div class="error-description"></div>
                         </div>
 
                         <div class="col-lg-12">
                             <label for="boardName" class="form-label">Upload Image</label>
-                            <input class="form-control" type="file" name="file" id="main_picture">
+                            <input class="form-control" type="file" name="file" id="main_picture" autocomplete="off">
 
                             <div class="preview-img mt-4">
                                 <div id="main_image_view" class="h-100">
