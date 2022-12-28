@@ -9,8 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
-use function GuzzleHttp\Promise\all;
+use App\Service\NotificationHandler;
 
 class AuthController extends Controller
 {
@@ -125,5 +124,17 @@ class AuthController extends Controller
         $user = User::get()->count();
         $notes = Note::get()->count();
         return view('admin.index', compact('user', 'notes'));
+    }
+
+    public function markAsRead()
+    {
+        NotificationHandler::markAsRead();
+        return redirect()->back();
+    }
+
+    public function markAllAsRead()
+    {
+        NotificationHandler::markAllAsRead();
+        return redirect()->back();
     }
 }

@@ -24,6 +24,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'index'])->name('admin-login');
     Route::post('/login', [AdminAuthController::class, 'admin_login'])->name('admin_login');
     Route::get('/logout', [AdminAuthController::class, 'admin_logout'])->name('admin_logout');
+    Route::get('/mark-as-read', [AdminAuthController::class, 'markAsRead'])->name('markRead');
+    Route::get('/mark-all-read', [AdminAuthController::class, 'markAllAsRead'])->name('markAllAsRead');
     Route::middleware('auth:admin')->group(function () {
 
         //Admin Index
