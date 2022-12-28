@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="px-2 fs-15">
                                                 <div class="form-check notification-check">
-                                                    <a href="{{ route('markRead') }}" class="btn btn-sm btn-soft-success">Mark as Read</a>
+                                                    <a href="{{ route('markRead', $notification->id) }}" class="btn btn-sm btn-soft-success">Mark as Read</a>
                                                 </div>
                                             </div>
                                         </div>

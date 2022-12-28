@@ -10,17 +10,15 @@ class NotificationHandler
         return $notifications;
     }
 
-    public static function markAsRead()
+    public static function markAsRead($id)
     {
-        auth('admin')->user()->unreadNotifications->markAsRead();
+        auth('admin')->user()->unreadNotifications->where('id', $id)->markAsRead();
         return redirect()->back();
     }
 
     public static function markAllAsRead()
     {
-        foreach (auth('admin')->user()->unreadNotifications as $notification) {
-            $notification->markAsRead();
-        }
+        auth('admin')->user()->unreadNotifications->markAsRead();
         return redirect()->back();
     }
 }

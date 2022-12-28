@@ -126,9 +126,9 @@ class AuthController extends Controller
         return view('admin.index', compact('user', 'notes'));
     }
 
-    public function markAsRead()
+    public function markAsRead($id)
     {
-        NotificationHandler::markAsRead();
+        NotificationHandler::markAsRead($id);
         return redirect()->back();
     }
 
