@@ -38,7 +38,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link " href="javascript:void()">
-                        <i class="ri-layout-3-line"></i> <span data-key="t-apps">Get Expert Advice On-Demand</span>
+                        <i class="ri-layout-3-line"></i> <span data-key="t-apps">C</span>
                     </a>
                 </li>
 

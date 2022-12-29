@@ -96,8 +96,9 @@
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                                         <input type="password" class="form-control pe-5" placeholder="Enter password" id="password" name="password">
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="togglePassword"><i class="ri-eye-fill align-middle"></i></button>
+
+                                                        <div class="error-password"></div>
                                                     </div>
-                                                    <div class="error-password"></div>
                                                 </div>
 
                                                 <div class="form-check">
@@ -140,7 +141,7 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> JournAI. Crafted with <i class="mdi mdi-heart text-danger"></i> by MicroBeck
+                                </script> JournAI. Crafted with <i class="mdi mdi-heart text-danger"></i> by TecBeck
                             </p>
                         </div>
                     </div>
@@ -181,7 +182,7 @@
 
                         setTimeout(function() {
                             $('.prompt').hide()
-                            window.location.href = "{{ route('index') }}";
+                            window.location.href = "{{ route('notes') }}";
                         }, 4000);
                         $('.prompt').show()
 

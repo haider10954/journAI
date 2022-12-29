@@ -80,12 +80,12 @@
                                         <div class="mt-4">
                                             <form id="registerForm">
                                                 @csrf
-                                                <div class="mb-3">
+                                                <div class="mb-0">
                                                     <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
                                                     <input type="email" class="form-control" id="useremail" placeholder="Enter email address" name="email">
                                                     <div class="error-email"></div>
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-0">
                                                     <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" id="username" placeholder="Enter username" name="name">
                                                     <div class="error-name"></div>
@@ -153,7 +153,7 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> journAI. Crafted with <i class="mdi mdi-heart text-danger"></i> by MicroBeck
+                                </script> journAI. Crafted with <i class="mdi mdi-heart text-danger"></i> by TecBeck
                             </p>
                         </div>
                     </div>

@@ -16,8 +16,8 @@
             <div class="card-body p-4">
                 <div class="prompt mt-3 mb-3"></div>
                 <div class="text-center">
-                    <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
-                        @if(auth()->user()->image == null)
+                    <div class="profile-user position-relative d-inline-block mx-auto  mb-4" id="main_image_view">
+                        @if(auth()->user()->photo == null)
                         <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-img" class="rounded-circle avatar-xl img-thumbnail user-profile-image" />
                         @else
                         <img src="{{asset( ''.auth()->user()->userImage())}}" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">
@@ -50,7 +50,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label">User Profile</label>
-                                        <input type="file" class="form-control" name="profile_img">
+                                        <input type="file" class="form-control" name="profile_img" id="main_picture">
                                         <div class="error-image"></div>
                                     </div>
                                 </div>
@@ -206,5 +206,18 @@
 
         });
     });
+
+    $("#main_picture").on("change", function(e) {
+
+        f = Array.prototype.slice.call(e.target.files)[0]
+        let reader = new FileReader();
+        reader.onload = function(e) {
+
+            $("#main_image_view").html(`<img id="main_image_preview"  src="${e.target.result}" class="main_image_preview rounded-circle avatar-xl img-thumbnail user-profile-image">`);
+        }
+        reader.readAsDataURL(f);
+
+
+    })
 </script>
 @endsection
