@@ -75,7 +75,7 @@
     $stringLength = Str::length($note->description);
     @endphp
 
-    <div class="col-lg-3" data-aos="fade-up">
+    <div class="col-lg-3 mb-3" data-aos="fade-up">
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="d-flex mb-2">
