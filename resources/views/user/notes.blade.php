@@ -79,7 +79,7 @@
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="d-flex mb-2">
-                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title">{{ $note->title }}</h6>
+                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title note_titles">{{ $note->title }}</h6>
                     <div class="dropdown">
                         <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill dropdown-icon"></i></a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">

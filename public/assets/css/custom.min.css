@@ -106,4 +106,9 @@
     object-fit: contain;
 }
 
+.note_titles {
+    color: #405189;
+    font-weight: bold;
+}
+
 /* Custom Card */
