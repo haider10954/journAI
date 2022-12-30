@@ -161,7 +161,7 @@
                         <h4 class="card-title" id="title_note"></h4>
                         <p class="card-text text-justify" id="note_description"></p>
                     </div>
-                    <img id="imagepreview" class="card-img-top img-fluid shadow-lg view-note-img" src="" alt="Card image cap" />
+                    <img id="imagepreviewNote" class="card-img-top img-fluid shadow-lg view-note-img" src="" alt="Card image cap" />
                 </div><!-- end card -->
             </div>
         </div>
@@ -341,7 +341,7 @@
         $('#title_note').text($(this).attr('data-title'));
         $('#note_description').text($(this).attr('data-description'));
         var image = $(this).attr('data-image');
-        $('#imagepreview').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
+        $('#imagepreviewNote').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
     })
 
     $('.note-title').on('click', function() {
