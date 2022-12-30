@@ -1,3 +1,6 @@
+<!-- aos css -->
+<link rel="stylesheet" href="{{asset('assets/libs/aos/aos.css')}}" />
+
 <!-- dropzone css -->
 <link rel="stylesheet" href="{{ asset('assets/libs/dropzone/dropzone.css') }}" type="text/css" />
 

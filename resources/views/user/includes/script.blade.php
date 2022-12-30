@@ -16,7 +16,6 @@
 <!-- titcket init js -->
 <script src="{{ asset('assets/js/pages/tasks-list.init.js') }}"></script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- dropzone min -->
@@ -42,6 +41,12 @@
 
 <!-- Tagify -->
 <script src="{{ asset('assets/js/jQuery.tagify.min.js') }}"></script>
+
+
+<!-- aos js -->
+<script src="{{ asset('assets/libs/aos/aos.js') }}"></script>
+<!-- animation init -->
+<script src="{{ asset('assets/js/pages/animation-aos.init.js') }}"></script>
 
 <!-- App js -->
 <script src="{{ asset('assets/js/app.js') }}"></script>

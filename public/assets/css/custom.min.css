@@ -92,3 +92,18 @@
 .text-justify {
     text-align: justify;
 }
+
+.dropdown-icon {
+    color: black;
+    font-weight: bold;
+}
+
+.view-note-img {
+    height: 300px;
+    border: 2px solid #e6e5e5;
+    padding: 10px;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+/* Custom Card */

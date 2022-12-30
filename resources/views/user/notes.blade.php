@@ -4,22 +4,6 @@
 
 @section('content')
 
-<div class="row">
-    <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0 custom_heading">Hi {{ auth()->user()->Username }}</h4>
-
-            <div class="page-title-right">
-                <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item "><a href="javascript: void(0);">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript: void(0);">Notes</a></li>
-                </ol>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- end page title -->
 
 <div class="card">
     <div class="card-body">
@@ -86,18 +70,38 @@
     $i++;
     }
     @endphp
-    <div class="col-lg-3 mb-3">
-        <div class="card tasks-box h-100">
+
+    @php
+    $stringLength = Str::length($note->description);
+    @endphp
+
+    <div class="col-lg-3" data-aos="fade-up">
+        <div class="card tasks-box">
             <div class="card-body">
-                <div class="my_note">
-                    <div class="d-flex mb-2">
-                        <h6 class="fs-15 mb-0 flex-grow-1  task-title">{{ $note->title }}</h6>
+                <div class="d-flex mb-2">
+                    <h6 class="fs-15 mb-0 flex-grow-1 text-truncate task-title">{{ $note->title }}</h6>
+                    <div class="dropdown">
+                        <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill dropdown-icon"></i></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                            <li><a class="dropdown-item editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                            <li><a class="dropdown-item deleteRecord" data-id="{{ $note->id }}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
+                        </ul>
                     </div>
-                    <p class="text-muted text-justify description mb-0"><a href="javascript:void(0)" data-response="{{ $note->response ?? '' }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title">{{ $note->description }}.</a></p>
                 </div>
-            </div>
-            <div class="card-footer">
                 <div class="mb-3">
+                    <p class="text-muted mb-1 single-note-description">
+                        <a href="javascript:void(0)" data-response="{{ $note->response ?? '' }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title single-note-description-link">
+                            {{ Str::limit($note->description , 150 , '') }}
+                            @if (Str::length($note->description) > 150)
+                            <span class="dots"></span>
+                            <span class="more" style="display: none;">{{ substr($note->description,150) }}</span>
+                            @endif
+                        </a>
+                    </p>
+                    <a data-bs-toggle="modal" href="#noteModal" class="badge badge-soft-primary cursor-pointer viewNote" data-id="{{ $note->id }}" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-image="{{ $note->image }}">View details</a>
+                </div>
+
+                <div class="mb-0">
                     <div class="d-flex mb-1">
                         <div class="flex-grow-1">
                             <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of {{ $t }}</h6>
@@ -110,7 +114,12 @@
                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <div class="d-flex align-items-center justify-content-between">
+            </div>
+            <div class="card-footer">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <span class="badge badge-soft-primary">{{ auth()->user()->Username }}</span>
+                    </div>
                     <div class="flex-shrink-0">
                         <div class="avatar-group">
                             @if(!empty(auth()->user()->photo))
@@ -122,12 +131,7 @@
                                 <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
                             </a>
                             @endif
-
                         </div>
-                    </div>
-                    <div class="dropdown">
-                        <a class="btn btn-sm btn-primary editBtn" data-bs-toggle="modal" href="#editModalNote" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-id="{{ $note->id }}" data-image="{{ $note->image }}"><i class="ri-edit-2-line"></i></a>
-                        <a class="btn btn-sm btn-danger  deleteRecord" data-id="{{ $note->id }}"><i class="ri-delete-bin-5-line"></i></a>
                     </div>
                 </div>
             </div>
@@ -142,7 +146,30 @@
     <!-- Notes Dynamic -->
 </div>
 
+<!-- View Note -->
+<div class="modal fade zoomIn" id="noteModal" tabindex="-1" aria-labelledby="noteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Note</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <input type="hidden" name="id" id="id">
+                        <h4 class="card-title" id="title_note"></h4>
+                        <p class="card-text text-justify" id="note_description"></p>
+                    </div>
+                    <img id="imagepreview" class="card-img-top img-fluid shadow-lg view-note-img" src="" alt="Card image cap" />
+                </div><!-- end card -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--End View Note -->
 
+<!-- Ai modal -->
 <div class="modal fade zoomIn" id="aiModal" tabindex="-1" aria-labelledby="aiModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -171,6 +198,7 @@
         </div>
     </div>
 </div>
+<!-- End Ai Note -->
 
 <div class="modal fade zoomIn" id="suggestionModal" tabindex="-1" aria-labelledby="suggestionModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -306,6 +334,16 @@
 
 @section('custom-script')
 <script>
+    var viewNoteModal = new bootstrap.Modal(document.getElementById("noteModal"), {});
+    $(document).on('click', '.viewNote', function() {
+        viewNoteModal.show();
+        $('#id').val($(this).attr('data-id'));
+        $('#title_note').text($(this).attr('data-title'));
+        $('#note_description').text($(this).attr('data-description'));
+        var image = $(this).attr('data-image');
+        $('#imagepreview').attr("src", "{{ asset('storage/notes') }}" + "/" + image);
+    })
+
     $('.note-title').on('click', function() {
         let response = JSON.parse($(this).attr('data-response'));
         console.log(response);
@@ -671,65 +709,61 @@
                     $('.note-box').html('');
                     let data = res.data;
                     for (var i = 0; i < data.length; i++) {
+                        var string = data[i].description;
+                        var length = 150;
+                        var trimmedString = string.substring(0, length);
                         let jsonResponse = JSON.parse(data[i].response);
                         $('.note-box').append(`
-                            <div class="col-lg-3 mb-3">
-                                <div class="card tasks-box h-100">
-                                    <div class="card-body">
-                                        <div class="my_note">
-                                            <div class="d-flex mb-2">
-                                                <h6 class="fs-15 mb-0 flex-grow-1  task-title">
-                                                    <a href="javascript:void(0)" data-response="${data[i].response}" onclick="showResponse($(this))" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block">${data[i].title}</a>
-                                                    <template class="response">${data[i].response}</template>
-                                                </h6>
-                                                <div class="dropdown">
-                                                    <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill"></i></a>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                                        <li><a class="dropdown-item" href="{{ route('view_notes') }}"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                                        <li><a class="dropdown-item editBtn" href="javascript:void(0)" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
-                                                        <li><a class="dropdown-item deleteRecord" data-id="${data[i].id}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted">${data[i].description}.</p>
+                        <div class="col-lg-3">
+                            <div class="card tasks-box h-100">
+                                <div class="card-body">
+                                    <div class="d-flex mb-2">
+                                        <h6 class="fs-15 mb-0 flex-grow-1  task-title">
+                                            <a href="javascript:void(0)" data-response="${data[i].response}" onclick="showResponse($(this))" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block">${data[i].title}</a>
+                                            <template class="response">${data[i].response}</template>
+                                        </h6>
+                                        <div class="dropdown">
+                                            <a href="javascript:void(0);" class="text-muted" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="ri-more-fill dropdown-icon"></i></a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                                <li><a class="dropdown-item editBtn" href="javascript:void(0)" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}"><i class="ri-edit-2-line align-bottom me-2 text-muted"></i> Edit</a></li>
+                                                <li><a class="dropdown-item deleteRecord" data-id="${data[i].id}"><i class="ri-delete-bin-5-line align-bottom me-2 text-muted"></i> Delete</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="card-footer">
-                                        <div class="mb-3">
-                                            <div class="d-flex mb-1">
-                                                <div class="flex-grow-1">
-                                                    <h6 class="text-muted mb-0"><span class="text-secondary">${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}% </span>of ${ Object.keys(jsonResponse.predictions)[0]}</h6>
-                                                </div>
-                                                <div class="flex-shrink-0">
-                                                    <span class="text-muted"></span>
-                                                </div>
-                                            </div>
-                                            <div class="progress rounded-3 progress-sm">
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: ${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <p class="text-muted mb-3"><a href="javascript:void(0)" class="d-block note-title"> ${trimmedString}.</a></p>
+                                    <div class="mb-0">
+                                        <div class="d-flex mb-1">
+                                            <div class="flex-grow-1">
+                                                <h6 class="text-muted mb-0"><span class="text-secondary">${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}% </span>of ${ Object.keys(jsonResponse.predictions)[0]}</h6>
                                             </div>
                                         </div>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1">
-                                                <span class="badge badge-soft-primary">{{ auth()->user()->fullname }}</span>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <div class="avatar-group">
-                                                    @if(!empty(auth()->user()->photo))
-                                                    <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                                        <img src="{{ asset('storage/user/'.auth()->user()->photo) }}" alt="" class="rounded-circle avatar-xxs">
-                                                    </a>
-                                                    @else
-                                                    <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
-                                                        <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
-                                                    </a>
-                                                    @endif
-
-                                                </div>
+                                        <div class="progress rounded-3 progress-sm">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: ${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1">
+                                            <span class="badge badge-soft-primary">{{ auth()->user()->Username }}</span>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <div class="avatar-group">
+                                                @if(!empty(auth()->user()->photo))
+                                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                                    <img src="{{ asset('storage/user/'.auth()->user()->photo) }}" alt="" class="rounded-circle avatar-xxs">
+                                                </a>
+                                                @else
+                                                <a href="javascript: void(0);" class="avatar-group-item" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Alexis">
+                                                    <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-xxs">
+                                                </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         `)
                     }
                 } else {
