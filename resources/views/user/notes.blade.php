@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="row g-3">
             <div class="col-xxl-3 col-sm-2">
-                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i>Create Note</button>
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createboardModal" id="logo-tour"><i class="ri-add-line align-bottom me-1"></i>Create Note</button>
             </div>
             <!--end col-->
 
@@ -24,7 +24,7 @@
                 <form id="filterData" class="row">
                     @csrf
                     <div class="col-lg-8 col-sm-4 mb-3 mb-md-0">
-                        <div class="search-box postion-relative">
+                        <div class="search-box postion-relative" id="date-tour">
                             <input id="range" class="form-control search bg-light border-light" placeholder="Select Date" name="select_range">
                             <i class="ri-close-fill cancel-search d-none" id="cancel_search"></i>
                         </div>
@@ -32,7 +32,7 @@
                     <!--end col-->
 
                     <div class="col-lg-4 col-sm-4">
-                        <button type="submit" class="btn btn-primary w-100"> <i class="ri-equalizer-fill me-1 align-bottom"></i>
+                        <button type="submit" class="btn btn-primary w-100" id="filter-tour"> <i class="ri-equalizer-fill me-1 align-bottom"></i>
                             Filters
                         </button>
                     </div>

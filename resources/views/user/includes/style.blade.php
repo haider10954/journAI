@@ -1,3 +1,6 @@
+<!-- shepherd.js css -->
+<link rel="stylesheet" href="{{asset('assets/libs/shepherd.js/css/shepherd.css')}}">
+
 <!-- aos css -->
 <link rel="stylesheet" href="{{asset('assets/libs/aos/aos.css')}}" />
 

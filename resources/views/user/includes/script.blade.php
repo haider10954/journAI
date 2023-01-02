@@ -48,5 +48,11 @@
 <!-- animation init -->
 <script src="{{ asset('assets/js/pages/animation-aos.init.js') }}"></script>
 
+<!-- shepherd js -->
+<script src="{{asset('assets/libs/shepherd.js/js/shepherd.min.js')}}"></script>
+
+<!-- tour init -->
+<script src="{{asset('assets/js/pages/tour.init.js')}}"></script>
+
 <!-- App js -->
 <script src="{{ asset('assets/js/app.js') }}"></script>
