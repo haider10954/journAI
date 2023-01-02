@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-note', [NoteController::class, 'add_note'])->name('add-note');
     Route::post('/update-post', [NoteController::class, 'edit_note'])->name('edit-note');
     Route::post('/delete-record', [NoteController::class, 'delete_note'])->name('delete-note');
+    Route::post('/check-tour-status', [AuthController::class, 'update_tour_status'])->name('check_tour_status');
 
     //Filter Data
     Route::post('/search-data', [NoteController::class, 'filterdata'])->name('filter_data');

@@ -23,7 +23,7 @@
             <div class="col-xxl-6 col-sm-6">
                 <form id="filterData" class="row">
                     @csrf
-                    <div class="col-lg-8 col-sm-4 mb-3 mb-md-0">
+                    <div class="col-lg-8 col-sm-8 mb-3 mb-md-0">
                         <div class="search-box postion-relative" id="date-tour">
                             <input id="range" class="form-control search bg-light border-light" placeholder="Select Date" name="select_range">
                             <i class="ri-close-fill cancel-search d-none" id="cancel_search"></i>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="mb-0">
                     <p class="text-muted mb-1 single-note-description mb-2">
-                        <a href="javascript:void(0)" data-response="{{ $note->response ?? '' }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title single-note-description-link">
+                        <a href="javascript:void(0)" data-response="{{ $note->response ?? '' }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title single-note-description-link" id="predictions-tour">
                             {{ Str::limit($note->description , 150 , '') }}
                             @if (Str::length($note->description) > 150)
                             <span class="dots"></span>
@@ -844,5 +844,121 @@
             $(document).find('.no-records #no_record').remove();
         }
     });
+
+    //Tour
+    var tour = new Shepherd.Tour({
+        defaultStepOptions: {
+            cancelIcon: {
+                enabled: !0
+            },
+            classes: "shadow-md bg-purple-dark",
+            scrollTo: {
+                behavior: "smooth",
+                block: "center"
+            },
+        },
+        useModalOverlay: {
+            enabled: !0
+        },
+    });
+    if ('{{ auth()->user()->tour_status }}' == 0) {
+        document.querySelector("#logo-tour") &&
+            tour.addStep({
+                title: "Welcome Back !",
+                text: "Click this button to create a new note",
+                attachTo: {
+                    element: "#logo-tour",
+                    on: "bottom"
+                },
+                buttons: [{
+                    text: "Next",
+                    classes: "btn btn-success",
+                    action: tour.next
+                }, ],
+            }),
+            document.querySelector("#date-tour") &&
+            tour.addStep({
+                title: "Select Dates",
+                text: "Select range of date to filter out data.",
+                attachTo: {
+                    element: "#date-tour",
+                    on: "bottom"
+                },
+                buttons: [{
+                        text: "Back",
+                        classes: "btn btn-light",
+                        action: tour.back
+                    },
+                    {
+                        text: "Next",
+                        classes: "btn btn-success",
+                        action: tour.next
+                    },
+                ],
+            }),
+            document.querySelector("#filter-tour") &&
+            tour.addStep({
+                title: "Apply Filter",
+                text: "Click here to apply filter.",
+                attachTo: {
+                    element: "#filter-tour",
+                    on: "bottom"
+                },
+                buttons: [{
+                        text: "Back",
+                        classes: "btn btn-light",
+                        action: tour.back
+                    },
+                    {
+                        text: "Next",
+                        classes: "btn btn-success",
+                        action: tour.next
+                    },
+                ],
+            }),
+            document.querySelector("#predictions-tour") &&
+            tour.addStep({
+                title: "View Predictions",
+                text: "Click anywhere on text to view AI predictions",
+                attachTo: {
+                    element: "#getproduct-tour",
+                    on: "bottom"
+                },
+                buttons: [{
+                        text: "Back",
+                        classes: "btn btn-light",
+                        action: tour.back
+                    },
+                    {
+                        text: "Next",
+                        classes: "btn btn-success",
+                        action: tour.next
+                    },
+                ],
+            }),
+            tour.start();
+        tour.on("complete", function() {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('check_tour_status') }}",
+                dataType: 'json',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                beforeSend: function() {},
+                success: function(res) {
+                    if (res.success) {
+                        setTimeout(function() {
+                            window.location.href.reload();
+                        }, 2000);
+
+                    } else {}
+                },
+                error: function(e) {}
+            });
+        });
+    } else {
+        console.log('Tour Completed');
+    };
 </script>
 @endsection

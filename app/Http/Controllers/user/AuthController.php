@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Note;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,15 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         if ($user) {
+
+            $dummy_note = Note::create([
+                'user_id' => $user->id,
+                'title' => 'Dummy Note Title',
+                'response' => '{"predictions":{"disappointment":0.2715681791305542,"sadness":0.20725218951702118,"neutral":0.08957844972610474,"annoyance":0.0881405919790268,"disapproval":0.05938264727592468},"harassment_predictions":{"Normal":0.3852198175500092,"Harassment":0.6147801824499908},"suggestions":"default"}',
+                'analytics' => '{"disappointment":0.2715681791305542,"sadness":0.20725218951702118,"neutral":0.08957844972610474,"annoyance":0.0881405919790268,"disapproval":0.05938264727592468}',
+                'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+            ]);
+
             return json_encode(
                 [
                     'success' => true,
@@ -109,6 +119,28 @@ class AuthController extends Controller
                 [
                     'success' => true,
                     'message' => 'User profile has been Updated.'
+                ]
+            );
+        } else {
+            return json_encode(
+                [
+                    'success' => false,
+                    'message' => 'Something went wrong. Please try again later.'
+                ]
+            );
+        }
+    }
+
+    public function update_tour_status()
+    {
+        $user = User::where('id', auth()->id())->update([
+            'tour_status' => 1
+        ]);
+        if ($user) {
+            return json_encode(
+                [
+                    'success' => true,
+                    'message' => 'Tour status updated',
                 ]
             );
         } else {
