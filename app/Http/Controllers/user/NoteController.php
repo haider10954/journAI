@@ -40,7 +40,7 @@ class NoteController extends Controller
             'file' => 'mimes:jpg,jpeg,png'
         ]);
         $response = Http::asForm()->post('http://3.140.248.219:8000/predict_api', [
-            'description' => $request['description'],
+            'text' => $request['description'],
         ]);
         $getData = $response->collect()->toArray();
         $data = [
