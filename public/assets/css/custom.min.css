@@ -117,4 +117,12 @@
     right: 10px;
 }
 
+div .error-email {
+    height: 8px;
+}
+
+div .error-password {
+    height: 8px;
+}
+
 /* Custom Card */
