@@ -40,7 +40,7 @@ class NoteController extends Controller
             'file' => 'mimes:jpg,jpeg,png'
         ]);
         $response = Http::asForm()->post('http://3.140.248.219:8000/predict_api', [
-            'text' => $request['title'],
+            'description' => $request['description'],
         ]);
         $getData = $response->collect()->toArray();
         $data = [
@@ -76,9 +76,6 @@ class NoteController extends Controller
             'description' => 'required',
             'file' => 'mimes:jpg,jpeg,png'
         ]);
-
-
-
         $data = [];
 
         if (isset($request->title)) {
@@ -136,31 +133,56 @@ class NoteController extends Controller
     public function filterdata()
     {
         $date = null;
-        if (request()->has('select_range')) {
-            $date = explode('to', str_replace(' ', '', request('select_range')));
-        }
+        if (!empty(request()->has('select_range'))) {
+            if (request()->has('select_range')) {
+                $date = explode('to', str_replace(' ', '', request('select_range')));
+            }
 
-        $notes = Note::where('user_id', auth()->id())->when(!empty($date), function ($query) use ($date) {
-            $query->whereBetween('created_at', [$date[0], $date[1]]);
-        })->get();
+            $notes = Note::where('user_id', auth()->id())->when(!empty($date), function ($query) use ($date) {
+                $query->whereBetween('created_at', [$date[0], $date[1]]);
+            })->get();
 
-        if ($notes) {
-            if (count($notes) > 0) {
-                return json_encode([
-                    'success' => true,
-                    'data' => $notes,
-                ]);
+            if ($notes) {
+                if (count($notes) > 0) {
+                    return json_encode([
+                        'success' => true,
+                        'data' => $notes,
+                    ]);
+                } else {
+                    return json_encode([
+                        'success' => false,
+                        'message' => 'No Record Found',
+                    ]);
+                }
             } else {
                 return json_encode([
                     'success' => false,
-                    'message' => 'No Record Found',
+                    'message' => 'Something went wrong, Please try again.',
                 ]);
             }
         } else {
-            return json_encode([
-                'success' => false,
-                'message' => 'Something went wrong, Please try again.',
-            ]);
+            $notes = Note::where('user_id', auth()->id())->when(!empty($date), function ($query) use ($date) {
+                $query->whereBetween('created_at', [$date[0], $date[1]]);
+            })->get();
+
+            if ($notes) {
+                if (count($notes) > 0) {
+                    return json_encode([
+                        'success' => true,
+                        'data' => $notes,
+                    ]);
+                } else {
+                    return json_encode([
+                        'success' => false,
+                        'message' => 'No Record Found',
+                    ]);
+                }
+            } else {
+                return json_encode([
+                    'success' => false,
+                    'message' => 'Something went wrong, Please try again.',
+                ]);
+            }
         }
     }
 }

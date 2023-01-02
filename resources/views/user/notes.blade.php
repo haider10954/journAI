@@ -7,34 +7,43 @@
 
 <div class="card">
     <div class="card-body">
-        <div class="row g-2">
-            <div class="col-lg-12">
-                <div class="d-flex justify-content-between">
-                    <div class="hstack gap-2">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i> Create Note</button>
-                    </div>
-                    <form id="filterData">
-                        @csrf
-                        <div class="row g-3 mb-0 align-items-center">
-                            <div class="col-sm-auto">
-                                <div class="input-group">
-                                    <input id="range" class="form-control border-0" placeholder="Select Date" name="select_range">
-                                    <div class="input-group-text bg-primary border-primary text-white">
-                                        <button type="submit" class="btn btn-sm text-center"><i class="ri-google-play-fill"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+        <div class="row g-3">
+            <div class="col-xxl-3 col-sm-2">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createboardModal"><i class="ri-add-line align-bottom me-1"></i>Create Note</button>
+            </div>
+            <!--end col-->
+
+            <div class="col-xxl-3 col-sm-4">
+                <div class="search-box">
+                    <input id="myInput" type="text" class="form-control search bg-light border-light" placeholder="Search for notes">
+                    <i class="ri-search-line search-icon"></i>
                 </div>
+            </div>
+            <!--end col-->
+            <div class="col-xxl-6 col-sm-6">
+                <form id="filterData" class="row">
+                    @csrf
+                    <div class="col-lg-8 col-sm-4 mb-3 mb-md-0">
+                        <div class="search-box postion-relative">
+                            <input id="range" class="form-control search bg-light border-light" placeholder="Select Date" name="select_range">
+                            <i class="ri-close-fill cancel-search d-none" id="cancel_search"></i>
+                        </div>
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-lg-4 col-sm-4">
+                        <button type="submit" class="btn btn-primary w-100"> <i class="ri-equalizer-fill me-1 align-bottom"></i>
+                            Filters
+                        </button>
+                    </div>
+                </form>
             </div>
             <!--end col-->
         </div>
         <!--end row-->
     </div>
-    <!--end card-body-->
 </div>
-<!--end card-->
+<!--end card-body-->
 
 <div class="row mb-3 note-box">
     <input type="hidden" name="checkNote" id="checkNote" value="{{$notes}}">
@@ -75,7 +84,7 @@
     $stringLength = Str::length($note->description);
     @endphp
 
-    <div class="col-lg-3 mb-3" data-aos="fade-up">
+    <div class="col-lg-3 mb-3 searchable" data-aos="fade-up" data-name="{{ $note->title }}">
         <div class="card tasks-box h-100">
             <div class="card-body">
                 <div class="d-flex mb-2">
@@ -88,8 +97,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mb-3">
-                    <p class="text-muted mb-1 single-note-description">
+                <div class="mb-0">
+                    <p class="text-muted mb-1 single-note-description mb-2">
                         <a href="javascript:void(0)" data-response="{{ $note->response ?? '' }}" data-bs-target="#aiModal" data-bs-toggle="modal" class="d-block note-title single-note-description-link">
                             {{ Str::limit($note->description , 150 , '') }}
                             @if (Str::length($note->description) > 150)
@@ -98,24 +107,23 @@
                             @endif
                         </a>
                     </p>
-                    <a data-bs-toggle="modal" href="#noteModal" class="badge badge-soft-primary cursor-pointer viewNote" data-id="{{ $note->id }}" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-image="{{ $note->image }}">View details</a>
+                    <a data-bs-toggle="modal" href="#noteModal" class="badge badge-soft-primary cursor-pointer viewNote mb-2" data-id="{{ $note->id }}" data-title="{{ $note->title }}" data-description="{{ $note->description }}" data-image="{{ $note->image }}">View details</a>
                 </div>
-
-                <div class="mb-0">
+            </div>
+            <div class="card-footer">
+                <div class="mb-2">
                     <div class="d-flex mb-1">
                         <div class="flex-grow-1">
                             <h6 class="text-muted mb-0"><span class="text-secondary">{{ $first_width }}% </span>of {{ $t }}</h6>
                         </div>
                         <div class="flex-shrink-0">
-                            <span class="text-muted">{{ $note->created_at->format('Y-M-d') }}</span>
+                            <span class="text-muted ms-2">{{ $note->created_at->format('Y-M-d') }}</span>
                         </div>
                     </div>
                     <div class="progress rounded-3 progress-sm">
                         <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $first_width }}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
                 <div class="d-flex align-items-center">
                     <div class="flex-grow-1">
                         <span class="badge badge-soft-primary">{{ auth()->user()->Username }}</span>
@@ -200,6 +208,7 @@
 </div>
 <!-- End Ai Note -->
 
+<!-- Suggestion Modal -->
 <div class="modal fade zoomIn" id="suggestionModal" tabindex="-1" aria-labelledby="suggestionModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -218,6 +227,7 @@
         </div>
     </div>
 </div>
+<!-- End Suggestion Modal -->
 
 <!-- Add Note Modal -->
 <div class="modal fade" id="createboardModal" tabindex="-1" aria-labelledby="createboardModalLabel" aria-hidden="true">
@@ -334,6 +344,23 @@
 
 @section('custom-script')
 <script>
+    $('#range').on('change', function() {
+        if ($('#range').val() != '') {
+            $('#cancel_search').removeClass('d-none');
+        } else {
+            $('#cancel_search').addClass('d-none');
+        }
+    });
+
+    $('#cancel_search').on('click', function() {
+        $('#range').flatpickr({
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+            mode: "range"
+        }).clear();
+    });
+
     var viewNoteModal = new bootstrap.Modal(document.getElementById("noteModal"), {});
     $(document).on('click', '.viewNote', function() {
         viewNoteModal.show();
@@ -632,8 +659,8 @@
 
     $("#range").flatpickr({
         altInput: true,
-        altFormat: "F j, Y",
-        dateFormat: "Y-m-d",
+        altFormat: "F j, y",
+        dateFormat: "y-m-d",
         mode: "range"
     });
 
@@ -730,8 +757,13 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <p class="text-muted mb-3"><a href="javascript:void(0)" class="d-block note-title"> ${trimmedString}.</a></p>
                                     <div class="mb-0">
+                                        <p class="text-muted mb-3"><a href="javascript:void(0)" class="d-block note-title"> ${trimmedString}.</a></p>
+                                        <a data-bs-toggle="modal" href="#noteModal" class="badge badge-soft-primary cursor-pointer viewNote mb-2" data-title="${data[i].title}" data-description="${data[i].description}" data-id="${data[i].id}" data-image="${data[i].image}">View details</a>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="mb-2">
                                         <div class="d-flex mb-1">
                                             <div class="flex-grow-1">
                                                 <h6 class="text-muted mb-0"><span class="text-secondary">${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}% </span>of ${ Object.keys(jsonResponse.predictions)[0]}</h6>
@@ -741,8 +773,6 @@
                                             <div class="progress-bar bg-danger" role="progressbar" style="width: ${ (Object.values(jsonResponse.predictions)[0]*100).toFixed(1)}%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-footer">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-grow-1">
                                             <span class="badge badge-soft-primary">{{ auth()->user()->Username }}</span>
@@ -781,6 +811,20 @@
                     <div class="text-center bg-white">
                         <img src={{ asset('assets/images/no-data-found.png') }} class="img-fuild" style="height:300px;"></img>
                     </div>`)
+            }
+        });
+    });
+
+
+    $("#myInput").on("keyup keypress", function() {
+        var value = $(this).val();
+        $(".searchable").each(function(index) {
+            $row = $(this);
+            var id = $row.attr("data-name");
+            if (id.indexOf(value) != 0) {
+                $(this).hide();
+            } else {
+                $(this).show();
             }
         });
     });
