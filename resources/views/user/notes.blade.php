@@ -46,6 +46,8 @@
 <!--end card-body-->
 
 <div class="row mb-3 note-box">
+
+    <div class="no-records d-flex align-items-center justify-content-center w-100"></div>
     <input type="hidden" name="checkNote" id="checkNote" value="{{$notes}}">
     @if($notes->count() > 0)
     @foreach($notes as $note)
@@ -816,17 +818,31 @@
     });
 
 
+    let hiddenCount = 0;
     $("#myInput").on("keyup keypress", function() {
+        hiddenCount = 0;
         var value = $(this).val();
         $(".searchable").each(function(index) {
             $row = $(this);
             var id = $row.attr("data-name");
-            if (id.indexOf(value) != 0) {
+            var name = id.toLowerCase();
+
+            if (name.indexOf(value) != 0) {
                 $(this).hide();
+                hiddenCount++;
             } else {
                 $(this).show();
             }
         });
+        if (hiddenCount == $('.searchable').length) {
+            $('.no-records').html(`
+                    <div id="no_record" class="text-center">
+                        <img src="{{ asset('assets/images/no-data-found.png') }}" alt="img" class="img-fluid" style="height: 300px;">
+                    </div>
+                `);
+        } else {
+            $(document).find('.no-records #no_record').remove();
+        }
     });
 </script>
 @endsection
