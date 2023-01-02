@@ -12,7 +12,7 @@
     <div class="row g-4">
         <div class="col-auto">
             <div class="avatar-lg">
-                @if(auth()->user()->image == null)
+                @if(auth()->user()->photo == null)
                 <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-img" class="img-thumbnail rounded-circle" />
                 @else
                 <img src="{{asset( ''.auth()->user()->userImage())}}" alt="user-img" class="img-thumbnail rounded-circle" />
