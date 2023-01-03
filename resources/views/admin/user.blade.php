@@ -24,12 +24,32 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">User Notes</h4>
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 mb-3 mb-md-0">
+                        <h4 class="card-title mb-0 flex-grow-1">User Notes</h4>
+                    </div>
+                    <div class="col-lg-3 mb-3 mb-md-0">
+                        <div class="form-check form-switch form-switch-right form-switch-md">
+                            <input class="form-control" placeholder="Search by name" type="text" id="myInput" onkeyup="myFunction()">
+                        </div>
+                    </div>
 
-                <div class="flex-shrink-0">
-                    <div class="form-check form-switch form-switch-right form-switch-md">
-                        <input class="form-control" placeholder="Search by name" type="text" id="myInput" onkeyup="myFunction()">
+                    <div class="col-lg-3 mb-3 mb-md-0">
+                        <div class="form-check form-switch form-switch-right form-switch-md">
+                            <input class="form-control" placeholder="Search by comapany" type="text" id="companyInput" onkeyup="companyFunction()">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mb-3 mb-md-0">
+                        <div class="input-group">
+                            <select class="form-select w-100" id="genderInput" onchange="genderFunction()">
+                                <option selected>Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
             </div><!-- end card header -->
@@ -143,6 +163,64 @@
         let hiddenCount = 0;
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                    hiddenCount++;
+                }
+            }
+        }
+        if (hiddenCount === $('#myTable tr').length) {
+            $('#myTable').append(`
+                  <tr id="no_record">
+                    <td colspan="7" class="text-center">No records found</td>
+                  </tr>`);
+        } else {
+            $(document).find('#no_record').remove();
+        }
+    }
+
+    function genderFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("genderInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        let hiddenCount = 0;
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                    hiddenCount++;
+                }
+            }
+        }
+        if (hiddenCount === $('#myTable tr').length) {
+            $('#myTable').append(`
+                  <tr id="no_record">
+                    <td colspan="7" class="text-center">No records found</td>
+                  </tr>`);
+        } else {
+            $(document).find('#no_record').remove();
+        }
+    }
+
+    function companyFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("companyInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        let hiddenCount = 0;
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[5];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
