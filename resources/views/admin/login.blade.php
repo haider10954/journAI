@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="error-password"></div>
                                         </div>
-                                        <div class="mt-4">
+                                        <div>
                                             <button class="btn btn-success w-100" id="submitForm" type="submit">Sign In</button>
                                         </div>
                                     </form>
