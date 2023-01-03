@@ -14,7 +14,7 @@
         <div class="card mt-n5">
             <div class="card-body p-4">
                 <div class="text-center">
-                    <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
+                    <div class="profile-user position-relative d-inline-block mx-auto  mb-4" id="main_image_view">
                         @if( auth('admin')->user()->image == null)
                         <img src="{{asset('assets/images/users/avatar-1.jpg')}}" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">
                         @else
@@ -76,7 +76,7 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="phonenumberInput" class="form-label">Image</label>
-                                        <input type="file" class="form-control" name="image" value="{{ auth('admin')->user()->email }}">
+                                        <input type="file" class="form-control" name="image" id="main_picture">
                                         <div class="error-image"></div>
                                     </div>
                                 </div>
@@ -149,6 +149,19 @@
 
 @section('custom-script')
 <script>
+    $("#main_picture").on("change", function(e) {
+
+        f = Array.prototype.slice.call(e.target.files)[0]
+        let reader = new FileReader();
+        reader.onload = function(e) {
+
+            $("#main_image_view").html(`<img id="main_image_preview"  src="${e.target.result}" class="main_image_preview rounded-circle avatar-xl img-thumbnail user-profile-image">`);
+        }
+        reader.readAsDataURL(f);
+
+
+    })
+
     $("#updateProfile").on('submit', function(e) {
         e.preventDefault();
         var formData = new FormData($("#updateProfile")[0]);
