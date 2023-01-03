@@ -57,7 +57,7 @@
                                     <td><a href="#" class="fw-medium">{{ $loop->index+1 }}</a></td>
                                     <td>{{ $u->fullname }}</td>
                                     <td>{{ $u->email }}</td>
-                                    <td>{{ $u->gender }}</td>
+                                    <td class="text-capitalize">{{ $u->gender }}</td>
                                     <td>{{ $u->Job_designation }}</td>
                                     <td>{{ $u->company_name }}</td>
                                     <td><a class="badge bg-success" href="{{ route('admin_user_notes' , $u->id ) }}">User Notes</a></td>
