@@ -32,9 +32,12 @@
                     <!--end col-->
 
                     <div class="col-lg-4 col-sm-4">
-                        <button type="submit" class="btn btn-primary w-100" id="filter-tour"> <i class="ri-equalizer-fill me-1 align-bottom"></i>
-                            Filters
-                        </button>
+                        <div class="d-flex align-items-center gap-2">
+                            <button type="submit" class="btn btn-primary w-100" id="filter-tour"> <i class="ri-equalizer-fill me-1 align-bottom"></i>
+                                Filters
+                            </button>
+                            <button type="button" class="btn btn-danger text-white" id="clearSearch"><i class=" ri-delete-bin-6-line"></i></button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -960,5 +963,11 @@
     } else {
         console.log('Tour Completed');
     };
+
+
+    $('#clearSearch').on('click', function() {
+        $('#range').flatpickr().clear()
+        window.location.reload();
+    });
 </script>
 @endsection
