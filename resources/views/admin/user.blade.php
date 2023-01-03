@@ -42,11 +42,11 @@
                     </div>
                     <div class="col-lg-3 mb-3 mb-md-0">
                         <div class="input-group">
-                            <select class="form-select w-100" id="genderInput" onchange="genderFunction()">
+                            <select class="form-select w-100" id="genderInput" onchange="genderFunction($(this))">
                                 <option selected>Select gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="others">Others</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                                <option value="2">Others</option>
                             </select>
                         </div>
 
@@ -77,7 +77,7 @@
                                     <td><a href="#" class="fw-medium">{{ $loop->index+1 }}</a></td>
                                     <td>{{ $u->fullname }}</td>
                                     <td>{{ $u->email }}</td>
-                                    <td class="text-capitalize">{{ $u->gender }}</td>
+                                    <td class="text-capitalize" data-gender="@if($u->gender == 'male'){{0}}@elseif($u->gender == 'female'){{1}}@else{{2}}@endif">{{ $u->gender }}</td>
                                     <td>{{ $u->Job_designation }}</td>
                                     <td>{{ $u->company_name }}</td>
                                     <td><a class="badge bg-success" href="{{ route('admin_user_notes' , $u->id ) }}">User Notes</a></td>
@@ -183,18 +183,17 @@
         }
     }
 
-    function genderFunction() {
+    function genderFunction(genderVal) {
         var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("genderInput");
-        filter = input.value.toUpperCase();
+        input = genderVal.val();
+        filter = input.toUpperCase();
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         let hiddenCount = 0;
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[3];
             if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                if (filter == td.getAttribute("data-gender")) {
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
