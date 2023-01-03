@@ -125,4 +125,13 @@ div .error-password {
     height: 8px;
 }
 
+.proifile-img {
+    padding: .25rem;
+    background-color: var(--vz-body-bg);
+    border: 1px solid var(--vz-border-color);
+    border-radius: .25rem;
+    width: 95px;
+    height: 100px;
+}
+
 /* Custom Card */
