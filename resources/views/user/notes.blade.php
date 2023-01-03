@@ -8,19 +8,19 @@
 <div class="card">
     <div class="card-body">
         <div class="row g-3">
-            <div class="col-xxl-3 col-sm-2">
+            <div class="col-lg-3 col-sm-3">
                 <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#createboardModal" id="logo-tour"><i class="ri-add-line align-bottom me-1"></i>Create Note</button>
             </div>
             <!--end col-->
 
-            <div class="col-xxl-3 col-sm-4">
+            <div class="col-lg-3 col-sm-3">
                 <div class="search-box">
                     <input id="myInput" type="text" class="form-control search bg-light border-light" placeholder="Search for notes">
                     <i class="ri-search-line search-icon"></i>
                 </div>
             </div>
             <!--end col-->
-            <div class="col-xxl-6 col-sm-6">
+            <div class="col-lg-6 col-sm-6">
                 <form id="filterData" class="row">
                     @csrf
                     <div class="col-lg-8 col-sm-8 mb-3 mb-md-0">
