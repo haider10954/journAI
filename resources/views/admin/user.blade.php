@@ -100,7 +100,7 @@
                                 @endif
                             </tbody>
                         </table>
-                        <div class="d-flex justify-content-end mt-3">
+                        <div class="d-flex justify-content-center mt-3">
                             {{ $user->links('vendor.pagination.bootstrap-4') }}
                         </div>
                     </div>

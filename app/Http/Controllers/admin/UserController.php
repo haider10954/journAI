@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function user_listing()
     {
-        $user = User::latest()->paginate(6);
+        $user = User::orderBy('id', 'DESC')->paginate(6);
         return view('admin.user', compact('user'));
     }
 
