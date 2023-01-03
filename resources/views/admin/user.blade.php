@@ -43,7 +43,7 @@
                     <div class="col-lg-3 mb-3 mb-md-0">
                         <div class="input-group">
                             <select class="form-select w-100" id="genderInput" onchange="genderFunction($(this))">
-                                <option selected>Select gender</option>
+                                <option selected disabled>Select gender</option>
                                 <option value="0">Male</option>
                                 <option value="1">Female</option>
                                 <option value="2">Others</option>
