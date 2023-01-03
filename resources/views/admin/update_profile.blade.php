@@ -83,8 +83,7 @@
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="hstack gap-2 justify-content-end">
-                                        <button type="submit" class="btn btn-primary" id="submitForm">Updates</button>
-                                        <button type="button" class="btn btn-soft-success">Cancel</button>
+                                        <button type="submit" class="btn btn-soft-success" id="submitForm">Update</button>
                                     </div>
                                 </div>
                                 <!--end col-->
