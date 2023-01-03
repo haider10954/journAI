@@ -16,11 +16,6 @@ class UserController extends Controller
 
     public function delete_user(Request $request)
     {
-        $user = User::where('id', $request->id)->first();
-        $filePath = storage_path('app/public/user/' . $user->photo);
-        if (file_exists($filePath)) {
-            unlink($filePath);
-        }
         $user = User::where('id', $request->id)->delete();
         if ($user) {
             return response()->json([
