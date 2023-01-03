@@ -94,7 +94,8 @@ class AuthController extends Controller
             'company_name' => 'required',
             'hobbies' => 'required',
             'address' => 'required',
-            'profile_img' => 'mimes:jpeg,png,jpg'
+            'profile_img' => 'mimes:jpeg,png,jpg',
+            'gender' => 'required',
         ]);
 
         $hobby = collect(json_decode($request->hobbies))->pluck('value');
@@ -113,6 +114,7 @@ class AuthController extends Controller
             'address' => $request['address'],
             'hobbies' => $hobby,
             'photo' => $file,
+            'gender' => $request['gender'],
         ]);
         if ($user) {
             return json_encode(

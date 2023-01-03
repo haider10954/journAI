@@ -64,6 +64,10 @@
                                                     <td class="text-muted">{{ auth()->user()->email }}</td>
                                                 </tr>
                                                 <tr>
+                                                    <th class="ps-0" scope="row">Gender</th>
+                                                    <td class="text-muted text-capitalize">{{ auth()->user()->gender }}</td>
+                                                </tr>
+                                                <tr>
                                                     <th class="ps-0" scope="row">Location :</th>
                                                     <td class="text-muted">{{ auth()->user()->address }}
                                                     </td>

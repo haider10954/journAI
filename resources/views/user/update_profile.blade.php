@@ -93,6 +93,27 @@
                                         <div class="error-hobby"></div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label">Gender</label>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male" {{ auth()->user()->gender == 'male' ? 'checked="checked"' : '' }}>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female" {{ auth()->user()->gender == 'female' ? 'checked="checked"' : '' }}>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Female
+                                        </label>
+                                    </div>
+                                    <div class="form-check mb-1">
+                                        <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault3" value="others" {{ auth()->user()->gender == 'others' ? 'checked="checked"' : '' }}>
+                                        <label class="form-check-label" for="flexRadioDefault3">
+                                            Others
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="col-lg-12">
                                     <div class="mb-3 pb-2">
                                         <label for="exampleFormControlTextarea" class="form-label">Address</label>
