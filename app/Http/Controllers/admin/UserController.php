@@ -78,6 +78,7 @@ class UserController extends Controller
             'address' => $request['address'],
             'hobbies' => $hobby,
             'photo' => $file,
+            'gender' => $request['gender'],
         ]);
         if ($user) {
             return json_encode(

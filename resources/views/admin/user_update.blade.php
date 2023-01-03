@@ -84,6 +84,27 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
+                                <label class="form-label">Gender</label>
+                                <div class="form-check mb-1">
+                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="male" {{ $user->gender == 'male' ? 'checked="checked"' : '' }}>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check mb-1">
+                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="female" {{ $user->gender == 'female' ? 'checked="checked"' : '' }}>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Female
+                                    </label>
+                                </div>
+                                <div class="form-check mb-1">
+                                    <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault3" value="others" {{ $user->gender == 'others' ? 'checked="checked"' : '' }}>
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        Others
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-floating">
                                     <input type="file" class="form-control" name="profile_img" id="main_picture">
                                     <label>Profile Image</label>
@@ -93,6 +114,7 @@
                                     <img src="{{ $user->userImage() }}" class="img-fluid p-2">
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="text-end">
                                     <button id="submitForm" type="submit" class="btn btn-primary">Update Profile</button>
