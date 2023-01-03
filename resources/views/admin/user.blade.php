@@ -43,7 +43,7 @@
                     <div class="col-lg-3 mb-3 mb-md-0">
                         <div class="input-group">
                             <select class="form-select w-100" id="genderInput" onchange="genderFunction($(this))">
-                                <option selected disabled>Select gender</option>
+                                <option value="all" selected>All options</option>
                                 <option value="0">Male</option>
                                 <option value="1">Female</option>
                                 <option value="2">Others</option>
@@ -193,7 +193,7 @@
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[3];
             if (td) {
-                if (filter == td.getAttribute("data-gender")) {
+                if (filter == td.getAttribute("data-gender") || filter == 'ALL') {
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
