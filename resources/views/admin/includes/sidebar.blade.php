@@ -5,7 +5,7 @@
                 <!-- Dark Logo-->
                 <a href="{{ route('admin_index') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/images/logo-sm.png')}}" alt="" height="22">
+                        <img src="{{ asset('assets/images/favicon.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
                         <img src="{{asset('assets/images/logo-white.png')}}" alt="" height="50">
@@ -14,7 +14,7 @@
                 <!-- Light Logo-->
                 <a href="{{ route('admin_index') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/images/logo-sm.png')}}" alt="" height="22">
+                        <img src="{{ asset('assets/images/favicon.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
                         <img src="{{asset('assets/images/logo-white.png')}}" alt="" height="50">
