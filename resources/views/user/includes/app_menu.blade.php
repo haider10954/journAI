@@ -1,4 +1,4 @@
-<div class="app-menu navbar-menu">
+<div class="app-menu navbar-menu d-none">
     <!-- LOGO -->
     <div class="navbar-brand-box">
         <!-- Dark Logo-->

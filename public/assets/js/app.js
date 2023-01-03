@@ -741,39 +741,12 @@
         "vertical" == e
             ? ((document.getElementById("two-column-menu").innerHTML = ""),
               (document.querySelector(".navbar-menu").innerHTML = c),
-              document.getElementById("theme-settings-offcanvas") &&
-                  ((document.getElementById("sidebar-size").style.display =
-                      "block"),
-                  (document.getElementById("sidebar-view").style.display =
-                      "block"),
-                  (document.getElementById("sidebar-color").style.display =
-                      "block"),
-                  (document.getElementById("sidebar-img").style.display =
-                      "block"),
-                  (document.getElementById("layout-position").style.display =
-                      "block"),
-                  (document.getElementById("layout-width").style.display =
-                      "block")),
-              h(),
+              document.getElementById("theme-settings-offcanvas") && h(),
               L(),
               q(),
               T())
             : "horizontal" == e
-            ? (B(),
-              document.getElementById("theme-settings-offcanvas") &&
-                  ((document.getElementById("sidebar-size").style.display =
-                      "none"),
-                  (document.getElementById("sidebar-view").style.display =
-                      "none"),
-                  (document.getElementById("sidebar-color").style.display =
-                      "none"),
-                  (document.getElementById("sidebar-img").style.display =
-                      "none"),
-                  (document.getElementById("layout-position").style.display =
-                      "block"),
-                  (document.getElementById("layout-width").style.display =
-                      "block")),
-              L())
+            ? (B(), document.getElementById("theme-settings-offcanvas") && L())
             : "twocolumn" == e &&
               (document
                   .getElementById("scrollbar")
@@ -1532,9 +1505,7 @@
                     o.classList.remove("show"),
                     n.classList.add("d-none");
             }),
-            document.body.addEventListener("click", function (e) {
-                
-            })),
+            document.body.addEventListener("click", function (e) {})),
         (t = document.getElementById("search-close-options")),
         (d = document.getElementById("search-dropdown-reponsive")),
         (e = document.getElementById("search-options-reponsive")),

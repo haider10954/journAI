@@ -12,9 +12,6 @@
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-    <!-- apexcharts -->
-    <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
-
     <!-- Dashboard init -->
     <script src="{{asset('assets/js/pages/dashboard-crm.init.js')}}"></script>
 

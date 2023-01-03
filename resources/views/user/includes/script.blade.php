@@ -16,43 +16,26 @@
 <!-- titcket init js -->
 <script src="{{ asset('assets/js/pages/tasks-list.init.js') }}"></script>
 
+<!-- Sweet Alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- dropzone min -->
-<script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
-
-<!-- filepond js -->
-<script src="{{ asset('assets/libs/filepond/filepond.min.js') }}"></script>
-<script src="{{ asset('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') }}"></script>
-<script src="{{ asset('assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}"></script>
-<script src="{{ asset('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}"></script>
-<script src="{{ asset('assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
-<script src="{{ asset('assets/js/pages/form-file-upload.init.js') }}"></script>
-
-
-
-<!-- Dashboard init -->
-<script src="{{ asset('assets/js/pages/dashboard-analytics.init.js') }}"></script>
-
+<!-- Ajax -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+<!-- Flatpicker -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-
-<!-- Tagify -->
-<script src="{{ asset('assets/js/jQuery.tagify.min.js') }}"></script>
 
 
 <!-- aos js -->
 <script src="{{ asset('assets/libs/aos/aos.js') }}"></script>
 <!-- animation init -->
 <script src="{{ asset('assets/js/pages/animation-aos.init.js') }}"></script>
-
 <!-- shepherd js -->
 <script src="{{asset('assets/libs/shepherd.js/js/shepherd.min.js')}}"></script>
-
 <!-- tour init -->
 <script src="{{asset('assets/js/pages/tour.init.js')}}"></script>
+<!-- Tagify -->
+<script src="{{ asset('assets/js/jQuery.tagify.min.js') }}"></script>
 
 <!-- App js -->
 <script src="{{ asset('assets/js/app.js') }}"></script>

@@ -112,7 +112,7 @@
 
         @include('user.includes.header')
         <!-- ========== App Menu ========== -->
-
+        @include('user.includes.app_menu')
 
         <!-- ============================================================== -->
         <!-- Start right Content here -->
