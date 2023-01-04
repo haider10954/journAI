@@ -11,11 +11,11 @@
 <div class="pt-4 mb-4 mb-lg-3 pb-lg-4">
     <div class="row g-4">
         <div class="col-auto">
-            <div class="avatar-lg">
+            <div>
                 @if(auth()->user()->photo == null)
-                <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-img" class="img-thumbnail rounded-circle" />
+                <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-img" class="proifile-img rounded-circle" />
                 @else
-                <img src="{{asset( ''.auth()->user()->userImage())}}" alt="user-img" class="img-thumbnail rounded-circle" />
+                <img src="{{asset( ''.auth()->user()->userImage())}}" alt="user-img" class="proifile-img rounded-circle" />
                 @endif
             </div>
         </div>
