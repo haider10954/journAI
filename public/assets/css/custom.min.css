@@ -130,7 +130,7 @@ div .error-password {
     background-color: var(--vz-body-bg);
     border: 1px solid var(--vz-border-color);
     border-radius: .25rem;
-    width: 95px;
+    width: 100px;
     height: 100px;
 }
 
