@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xxl-3">
+    <div class="col-xxl-12">
         <div class="card mt-n5">
             <div class="card-body p-4">
                 <div class="text-center">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xxl-9">
+    <div class="col-xxl-12">
         <div class="card mt-xxl-n5">
             <div class="card-header">
                 <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
