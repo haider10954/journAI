@@ -25,8 +25,8 @@
     <div class="col-xl-12">
         <div class="card crm-widget">
             <div class="card-body p-0">
-                <div class="row row-cols-xxl-5 row-cols-md-3 row-cols-1 g-0">
-                    <div class="col">
+                <div class="row g-0">
+                    <div class="col-lg-4">
                         <div class="py-4 px-3">
                             <h5 class="text-muted text-uppercase fs-13">Total Post<i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
                             <div class="d-flex align-items-center">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div><!-- end col -->
-                    <div class="col">
+                    <div class="col-lg-4">
                         <div class="mt-3 mt-md-0 py-4 px-3">
                             <h5 class="text-muted text-uppercase fs-13">Total Users<i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
                             <div class="d-flex align-items-center">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </div><!-- end col -->
-                    <div class="col">
+                    <div class="col-lg-4">
                         <div class="mt-3 mt-md-0 py-4 px-3">
                             <h5 class="text-muted text-uppercase fs-13">Lead Coversation <i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i></h5>
                             <div class="d-flex align-items-center">
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div><!-- end col -->
-                    <div class="col">
+                    <div class="col-lg-4">
                         <div class="mt-3 mt-lg-0 py-4 px-3">
                             <h5 class="text-muted text-uppercase fs-13">Daily Average Income <i class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
                             <div class="d-flex align-items-center">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div><!-- end col -->
-                    <div class="col">
+                    <div class="col-lg-4">
                         <div class="mt-3 mt-lg-0 py-4 px-3">
                             <h5 class="text-muted text-uppercase fs-13">Annual Deals <i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i></h5>
                             <div class="d-flex align-items-center">
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div><!-- end col -->
-                    <div class="col">
+                    <div class="col-lg-4">
                         <div class="mt-3 mt-lg-0 py-4 px-3">
                             <h5 class="text-muted text-uppercase fs-13">Annual Deals <i class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i></h5>
                             <div class="d-flex align-items-center">
