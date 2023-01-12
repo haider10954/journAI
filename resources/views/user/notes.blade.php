@@ -171,7 +171,9 @@
                         <h4 class="card-title" id="title_note"></h4>
                         <p class="card-text text-justify" id="note_description"></p>
                     </div>
-                    <img id="imagepreviewNote" class="card-img-top img-fluid shadow-lg view-note-img" src="" alt="Card image cap" />
+                    <div class="mt-2 p-3">
+                        <img id="imagepreviewNote" class="card-img-top img-fluid shadow-lg view-note-img" src="" alt="Card image cap" />
+                    </div>
                 </div><!-- end card -->
             </div>
         </div>
