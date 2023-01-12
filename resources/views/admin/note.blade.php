@@ -279,7 +279,7 @@
             `);
         } else {
             $('.noteImg').html('')
-            $('.noteImg').append(`<img class="card-img-bottom img-fluid" src="{{ asset("storage/notes/") }}/${image}" alt="Card image cap">`);
+            $('.noteImg').append(`<div class="mt-3 p-3"><img class="card-img-top img-fluid shadow-lg view-note-img" src="{{ asset("storage/notes/") }}/${image}" alt="Card image cap"></div>`);
         }
     });
 
